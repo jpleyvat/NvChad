@@ -3,6 +3,7 @@ local hooks = require "core.hooks"
 
 local config = utils.load_config()
 local map = utils.map
+local vmap = vim.api.nvim_set_keymap
 
 local maps = config.mappings
 local plugin_maps = maps.plugins
@@ -39,7 +40,7 @@ M.misc = function()
 
       -- don't yank text on delete ( dd )
       if not nvChad_options.copy_del then
-         map({ "n", "v" }, "d", '"_d')
+         map({ "n", "v" }, "dd", '"_dd')
       end
 
       -- navigation within insert mode
@@ -72,6 +73,79 @@ M.misc = function()
             ":lua require('nvchad').toggle_theme(require('core.utils').load_config().ui.theme_toggler) <CR>"
          )
       end
+  -- =====================================================================================
+  -- Normal mode remaps
+  -- =====================================================================================
+    map('n', '<leader>r', ':NvimTreeRefresh<CR>', {silent = true})
+    map('n', '<leader>n', ':NvimTreeFindFile<CR>', {silent = true})
+    -------------------------------
+    -- Replace all is aliased to S.
+    -------------------------------
+     vmap('n', 'S', ':%s//g<Left><Left>', {noremap = true})
+    ---------------------------
+    -- Move section up and down
+    ---------------------------
+    map('n', '<M-j>', 'ddp', {silent = true})
+    map('n', '<M-k>', 'ddkP', {silent = true})
+    -----------------
+    -- Indent outdent
+    -----------------
+    map('n', '>', 'V>', {silent=true})
+    map('n', '<', 'V<', {silent=true})
+    ---------------
+    -- Resize split
+    ---------------
+    map('n', '<C-M-j>', ':resize-1<CR>', {silent = true})
+    map('n', '<C-M-k>', ':resize+1<CR>', {silent = true})
+
+    map('n', '<C-M-h>', ':vertical resize-1<CR>', {silent = true})
+    map('n', '<C-M-l>', ':vertical resize+1<CR>', {silent = true})
+    -------------
+    -- Vimspector
+    -------------
+    map('n', '<leader>m>', ':MaximizerToggle<CR>', {silent = true})
+
+    map('n', '<leader>dd', ':call vimspector#Launch()<CR>', {silent = true})
+    map('n', '<leader>dd', ':call vimspector#Launch()<CR>', {silent = true})
+    map('n', '<leader>de', ':call vimspector#Reset()<CR>', {silent = true})
+
+    map('n', '<leader>dc', ':call Gotowindow(g:vimspector_session_windows.code)<CR>', {silent = true})
+    map('n', '<leader>dt', ':call Gotowindow(g:vimspector_session_windows.tagpage)<CR>', {silent = true})
+    map('n', '<leader>dv', ':call Gotowindow(g:vimspector_session_windows.variables)<CR>', {silent = true}) 
+    map('n', '<leader>dw', ':call Gotowindow(g:vimspector_session_windows.watches)<CR>', {silent = true}) 
+    map('n', '<leader>ds', ':call Gotowindow(g:vimspector_session_windows.stack_trace)<CR>', {silent = true})
+    map('n', '<leader>do', ':call Gotowindow(g:vimspector_session_windows.output)<CR>', {silent = true}) 
+
+    map('n', '<leader>dtcb', ':call vimspector#CleanLineBreakpoint()<CR>', {silent = true})
+
+    map('n', '<leader>d<space>', ':call vimspector#Continue()<CR>', {silent = true})
+
+    map('n', '<leader>dl', '<Plug>VimspectorStepInto', {silent = true})
+    map('n', '<leader>dj', '<Plug>VimspectorStepover', {silent = true})
+
+    map('n', '<leader>dk', '<Plug>VimspectorStepOut', {silent = true})
+    map('n', '<leader>d_', '<Plug>VimspectorRestart', {silent = true})
+
+    map('n', '<leader>drc', '<Plug>VimspectorRunToCursor', {silent = true})
+    map('n', '<leader>dbp', ':call vimspector#ToggleBreakpoint()<CR>', {silent = true})
+    map('n', '<leader>dcbp', '<Plug>Vimspector ToggleConditionalBreakpoint', {silent = true})
+    -- =====================================================================================
+    -- Visual mode remaps
+    -- =====================================================================================
+    map('v', '>', '>gv', {silent = true})
+    map('v', '<', '<gv', {silent = true})
+
+    map('v', '(', 'o<ESC>i(<ESC>gvol<ESC>a)<ESC>', {silent = true})
+    map('v', '{', 'o<ESC>i{<ESC>gvol<ESC>a}<ESC>', {silent = true})
+    map('v', '[', 'o<ESC>i[<ESC>gvol<ESC>a]<ESC>', {silent = true})
+
+    map('v', [["]], [[o<ESC>i"<ESC>gvol<ESC>a"<ESC>]], {silent = true})
+    map('v', [[']], [[o<ESC>i'<ESC>gvol<ESC>a'<ESC>]], {silent = true})
+    map('v', [[`]], [[o<ESC>i`<ESC>gvol<ESC>a`<ESC>]], {silent = true})
+
+
+    map('', '<leader>e', [[:w<CR>:exec '!python3' shellescape(@%, 1)<CR>]], {silent=true})
+    map('n', '<leader>', [[:WhichKey '<Space>'<CR>]], {silent})
    end
 
    local function required_mappings()
@@ -123,9 +197,24 @@ end
 
 M.bufferline = function()
    local m = plugin_maps.bufferline
+   
+  --Buffer close
+   map('n', '<A-q>', ':bd<CR>', {silent=true})
+  -- Move through buffers.
+   map('n', '<A-,>', ':BufferLineCyclePrev<CR>', {silent=true})
+   map('n', '<A-.>', ':BufferLineCycleNext<CR>', {silent=true})
 
-   map("n", m.next_buffer, ":BufferLineCycleNext <CR>")
-   map("n", m.prev_buffer, ":BufferLineCyclePrev <CR>")
+end
+
+M.chadsheet = function()
+   local m = plugin_maps.chadsheet
+
+   map("n", m.default_keys, ":lua require('cheatsheet').show_cheatsheet_telescope() <CR>")
+   map(
+      "n",
+      m.user_keys,
+      ":lua require('cheatsheet').show_cheatsheet_telescope{bundled_cheatsheets = false, bundled_plugin_cheatsheets = false } <CR>"
+   )
 end
 
 M.comment = function()
@@ -149,6 +238,10 @@ M.nvimtree = function()
    map("n", plugin_maps.nvimtree.focus, ":NvimTreeFocus <CR>")
 end
 
+M.neoformat = function()
+   map("n", plugin_maps.neoformat.format, ":Neoformat <CR>")
+end
+
 M.telescope = function()
    local m = plugin_maps.telescope
 
@@ -167,6 +260,14 @@ M.telescope_media = function()
    local m = plugin_maps.telescope.telescope_media
 
    map("n", m.media_files, ":Telescope media_files <CR>")
+end
+
+M.truezen = function()
+   local m = plugin_maps.truezen
+
+   map("n", m.ataraxis_mode, ":TZAtaraxis <CR>")
+   map("n", m.focus_mode, ":TZFocus <CR>")
+   map("n", m.minimalistic_mode, ":TZMinimalist <CR>")
 end
 
 return M

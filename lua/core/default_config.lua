@@ -77,7 +77,7 @@ M.plugins = {
          setup_lspconf = "", -- path of file containing setups of different lsps
       },
       nvimtree = {
-         enable_git = 0,
+         enable_git = 1,
       },
       luasnip = {
          snippet_path = {},

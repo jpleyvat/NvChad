@@ -262,5 +262,11 @@ return packer.startup(function()
       end,
    }
 
+   use { "puremourning/vimspector" }
+
+   use { "mattn/emmet-vim" }
+
+   use { "liuchengxu/vim-which-key" }
+
    require("core.hooks").run("install_plugins", use)
 end)
