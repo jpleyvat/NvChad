@@ -14,6 +14,7 @@ local cmd = vim.cmd
 local M = {}
 
 -- these mappings will only be called during initialization
+
 M.misc = function()
    local function non_config_mappings()
       -- Don't copy the replaced text after pasting in visual mode
@@ -103,18 +104,23 @@ M.misc = function()
     -------------
     -- Vimspector
     -------------
-    map('n', '<leader>m>', ':MaximizerToggle<CR>', {silent = true})
 
-    map('n', '<leader>dd', ':call vimspector#Launch()<CR>', {silent = true})
+    function GotoWindow(window)
+      vim.call('win_gotoid', window)
+      vim.cmd(':MaximizerToggle')
+    end
+
+    map('n', '<leader>m', ':MaximizerToggle<CR>', {silent = true})
+
     map('n', '<leader>dd', ':call vimspector#Launch()<CR>', {silent = true})
     map('n', '<leader>de', ':call vimspector#Reset()<CR>', {silent = true})
 
-    map('n', '<leader>dc', ':call Gotowindow(g:vimspector_session_windows.code)<CR>', {silent = true})
-    map('n', '<leader>dt', ':call Gotowindow(g:vimspector_session_windows.tagpage)<CR>', {silent = true})
-    map('n', '<leader>dv', ':call Gotowindow(g:vimspector_session_windows.variables)<CR>', {silent = true}) 
-    map('n', '<leader>dw', ':call Gotowindow(g:vimspector_session_windows.watches)<CR>', {silent = true}) 
-    map('n', '<leader>ds', ':call Gotowindow(g:vimspector_session_windows.stack_trace)<CR>', {silent = true})
-    map('n', '<leader>do', ':call Gotowindow(g:vimspector_session_windows.output)<CR>', {silent = true}) 
+    map('n', '<leader>dc', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.code)<CR>', {silent = true})
+    map('n', '<leader>dt', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.tagpage)<CR>', {silent = true})
+    map('n', '<leader>dv', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.variables)<CR>', {silent = true}) 
+    map('n', '<leader>dw', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.watches)<CR>', {silent = true}) 
+    map('n', '<leader>ds', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.stack_trace)<CR>', {silent = true})
+    map('n', '<leader>do', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.output)<CR>', {silent = true}) 
 
     map('n', '<leader>dtcb', ':call vimspector#CleanLineBreakpoint()<CR>', {silent = true})
 
@@ -144,7 +150,7 @@ M.misc = function()
     map('v', [[`]], [[o<ESC>i`<ESC>gvol<ESC>a`<ESC>]], {silent = true})
 
 
-    map('', '<leader>e', [[:w<CR>:exec '!python3' shellescape(@%, 1)<CR>]], {silent=true})
+    map('', '<leader>ex', [[:w<CR>:exec '!python3' shellescape(@%, 1)<CR>]], {silent=true})
     map('n', '<leader>', [[:WhichKey '<Space>'<CR>]], {silent})
    end
 

@@ -24,4 +24,4 @@ vim.cmd [[
   au BufEnter vimspector.* if g:do_filetype | setf python | endif
 ]]
 
-vim.cmd[[let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '__pycache__' ] "empty by default]]
+vim.cmd[[let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache', '__pycache__', 'venv'] "empty by default]]

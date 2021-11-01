@@ -268,5 +268,11 @@ return packer.startup(function()
 
    use { "liuchengxu/vim-which-key" }
 
+   use { "tomlion/vim-solidity" }
+
+   use { "szw/vim-maximizer" }
+
+   use { "github/copilot.vim" }
+
    require("core.hooks").run("install_plugins", use)
 end)
