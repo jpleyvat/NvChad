@@ -12,7 +12,7 @@ vim.o.termguicolors = true
 g.nvim_tree_ignore = { ".git", "node_modules", ".cache" }
 g.nvim_tree_add_trailing = 0 -- append a trailing slash to folder names
 g.nvim_tree_git_hl = git_status
-g.nvim_tree_gitignore = 0
+g.nvim_tree_gitignore = 1
 g.nvim_tree_hide_dotfiles = 0
 g.nvim_tree_highlight_opened_files = 1
 g.nvim_tree_indent_markers = 1
@@ -66,7 +66,7 @@ nvimtree.setup {
    },
    disable_netrw = true,
    hijack_netrw = true,
-   ignore_ft_on_setup = { "dashboard" },
+   ignore_ft_on_setup = { "dashboard", ".git", "node_modules", ".cache" },
    auto_close = true,
    open_on_tab = false,
    hijack_cursor = true,
@@ -74,7 +74,7 @@ nvimtree.setup {
    update_focused_file = {
       enable = true,
       update_cwd = false,
-      ignore_list = { ".git", "node_modules", ".cache" }
+      ignore_list = { ".git", "node_modules", ".cache" },
    },
    view = {
       allow_resize = true,
