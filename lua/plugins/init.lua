@@ -262,6 +262,14 @@ return packer.startup(function()
       end,
    }
 
+   -- Lint
+   use { 'mfussenegger/nvim-lint' }
+
+   use { 
+     "vimwiki/vimwiki" ,
+      config = override_req("vimwiki", "(plugins.configs.others).vimwiki()"),
+   }
+
    use { "puremourning/vimspector" }
 
    use { "mattn/emmet-vim" }

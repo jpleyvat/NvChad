@@ -78,7 +78,7 @@ M.misc = function()
   -- Normal mode remaps
   -- =====================================================================================
     map('n', '<leader>r', ':NvimTreeRefresh<CR>', {silent = true})
-    map('n', '<leader>n', ':NvimTreeFindFile<CR>', {silent = true})
+    -- map('n', '<leader>n', ':NvimTreeFindFile<CR>', {silent = true})
     -------------------------------
     -- Replace all is aliased to S.
     -------------------------------
@@ -101,6 +101,8 @@ M.misc = function()
 
     map('n', '<C-M-h>', ':vertical resize-1<CR>', {silent = true})
     map('n', '<C-M-l>', ':vertical resize+1<CR>', {silent = true})
+
+    map('n', '<leader>m', ':MaximizerToggle<CR>', {silent = true})
     -------------
     -- Vimspector
     -------------
@@ -110,11 +112,10 @@ M.misc = function()
       vim.cmd(':MaximizerToggle')
     end
 
-    map('n', '<leader>m', ':MaximizerToggle<CR>', {silent = true})
-
     map('n', '<leader>dd', ':call vimspector#Launch()<CR>', {silent = true})
     map('n', '<leader>de', ':call vimspector#Reset()<CR>', {silent = true})
 
+    -- Windows
     map('n', '<leader>dc', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.code)<CR>', {silent = true})
     map('n', '<leader>dt', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.tagpage)<CR>', {silent = true})
     map('n', '<leader>dv', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.variables)<CR>', {silent = true}) 
@@ -122,7 +123,6 @@ M.misc = function()
     map('n', '<leader>ds', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.stack_trace)<CR>', {silent = true})
     map('n', '<leader>do', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.output)<CR>', {silent = true}) 
 
-    map('n', '<leader>dtcb', ':call vimspector#CleanLineBreakpoint()<CR>', {silent = true})
 
     map('n', '<leader>d<space>', ':call vimspector#Continue()<CR>', {silent = true})
 
@@ -132,9 +132,13 @@ M.misc = function()
     map('n', '<leader>dk', '<Plug>VimspectorStepOut', {silent = true})
     map('n', '<leader>d_', '<Plug>VimspectorRestart', {silent = true})
 
-    map('n', '<leader>drc', '<Plug>VimspectorRunToCursor', {silent = true})
+    map('n', '<leader>drc', ':call vimspector#RunToCursor()<CR>', {silent = true})
+
+    -- Breakpoints
     map('n', '<leader>dbp', ':call vimspector#ToggleBreakpoint()<CR>', {silent = true})
-    map('n', '<leader>dcbp', '<Plug>Vimspector ToggleConditionalBreakpoint', {silent = true})
+    -- map('n', '<leader>dbl', ':call vimspector#CleanLineBreakpoint()<CR>', {silent = true})
+    map('n', '<leader>dbc', ':call vimspector#ClearBreakpoints()<CR>', {silent = true})
+    -- map('n', '<leader>dcbp', '<Plug>Vimspector ToggleConditionalBreakpoint', {silent = true})
     -- =====================================================================================
     -- Visual mode remaps
     -- =====================================================================================
@@ -150,7 +154,8 @@ M.misc = function()
     map('v', [[`]], [[o<ESC>i`<ESC>gvol<ESC>a`<ESC>]], {silent = true})
 
 
-    map('', '<leader>ex', [[:w<CR>:exec '!python3' shellescape(@%, 1)<CR>]], {silent=true})
+    map('', '<leader>ep', [[:w<CR>:exec '!python3' shellescape(@%, 1)<CR>]], {silent=true})
+    map('', '<leader>en', [[:w<CR>:exec '!node' shellescape(@%, 1)<CR>]], {silent=true})
     map('n', '<leader>', [[:WhichKey '<Space>'<CR>]], {silent})
    end
 
@@ -159,7 +164,8 @@ M.misc = function()
       map("n", maps.copy_whole_file, ":%y+ <CR>") -- copy whole file content
       map("n", maps.new_buffer, ":enew <CR>") -- new buffer
       map("n", maps.new_tab, ":tabnew <CR>") -- new tabs
-      map("n", maps.line_number_toggle, ":set nu! <CR>") -- toggle numbers
+      map("n", maps.line_number_toggle, ":set nu! rnu!<CR>") -- toggle numbers
+      map("n", maps.relative_number_toggle, ":set rnu! <CR>") -- toggle numbers
       map("n", maps.save_file, ":w <CR>") -- ctrl + s to save file
 
       -- terminal mappings --
@@ -206,6 +212,7 @@ M.bufferline = function()
    
   --Buffer close
    map('n', '<A-q>', ':bd<CR>', {silent=true})
+   map('n', '<leader>q', ':bd<CR>', {silent=true})
   -- Move through buffers.
    map('n', '<A-,>', ':BufferLineCyclePrev<CR>', {silent=true})
    map('n', '<A-.>', ':BufferLineCycleNext<CR>', {silent=true})
@@ -241,7 +248,7 @@ end
 
 M.nvimtree = function()
    map("n", plugin_maps.nvimtree.toggle, ":NvimTreeToggle <CR>")
-   map("n", plugin_maps.nvimtree.focus, ":NvimTreeFocus <CR>")
+   -- map("n", plugin_maps.nvimtree.focus, ":NvimTreeFocus <CR>")
 end
 
 M.neoformat = function()

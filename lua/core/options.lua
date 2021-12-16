@@ -4,6 +4,9 @@ local g = vim.g
 -- export user config as a global varibale
 g.nvchad_user_config = "chadrc"
 
+-- g.copilot_no_tab_map = true
+-- g.copilot_assume_mapped = true
+
 local options = require("core.utils").load_config().options
 
 opt.title = true

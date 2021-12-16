@@ -15,7 +15,7 @@ M.options = {
    smartcase = true,
    mapleader = " ",
    mouse = "a",
-   number = true,
+   number = false,
    -- relative numbers in normal mode tool at the bottom of options.lua
    numberwidth = 2,
    relativenumber = false,
@@ -61,14 +61,14 @@ M.plugins = {
    status = {
       blankline = true, -- show code scope with symbols
       bufferline = true, -- list open buffers up the top, easy switching too
-      colorizer = false, -- color RGB, HEX, CSS, NAME color codes
+      colorizer = true, -- color RGB, HEX, CSS, NAME color codes
       comment = true, -- easily (un)comment code, language aware
       dashboard = false, -- NeoVim 'home screen' on open
       esc_insertmode = true, -- map to <ESC> with no lag
       feline = true, -- statusline
       gitsigns = true, -- gitsigns in statusline
       lspsignature = true, -- lsp enhancements
-      telescope_media = false, -- media previews within telescope finders
+      telescope_media = true, -- media previews within telescope finders
       vim_matchup = true, -- % operator enhancements
       cmp = true,
       nvimtree = true,
@@ -111,7 +111,8 @@ M.mappings = {
    -- close current focused buffer
    close_buffer = "<leader>x",
    copy_whole_file = "<C-a>", -- copy all contents of the current buffer
-   line_number_toggle = "<leader>n", -- show or hide line number
+   line_number_toggle = "<leader>nn", -- show or hide line number
+   relative_number_toggle = "<leader>nr", -- show or hide line number
    new_buffer = "<S-t>", -- open a new buffer
    new_tab = "<C-t>b", -- open a new vim tab
    save_file = "<C-s>", -- save file using :w
@@ -154,8 +155,8 @@ M.mappings = {
 M.mappings.plugins = {
    -- list open buffers up the top, easy switching too
    bufferline = {
-      next_buffer = "<TAB>", -- next buffer
-      prev_buffer = "<S-Tab>", -- previous buffer
+      -- next_buffer = "<TAB>", -- next buffer
+      -- prev_buffer = "<S-Tab>", -- previous buffer
    },
    -- easily (un)comment code, language aware
    comment = {
@@ -195,5 +196,8 @@ M.mappings.plugins = {
       },
    },
 }
+vim.cmd("set nocompatible")
+vim.cmd("filetype plugin on")
+vim.cmd("syntax on")
 
 return M

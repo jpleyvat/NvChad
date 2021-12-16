@@ -49,7 +49,7 @@ M.colorizer = function()
          RGB = true, -- #RGB hex codes
          RRGGBB = true, -- #RRGGBB hex codes
          names = false, -- "Name" codes like Blue
-         RRGGBBAA = false, -- #RRGGBBAA hex codes
+         RRGGBBAA = true, -- #RRGGBBAA hex codes
          rgb_fn = false, -- CSS rgb() and rgba() functions
          hsl_fn = false, -- CSS hsl() and hsla() functions
          css = false, -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
@@ -105,6 +105,16 @@ M.signature = function()
          padding = "", -- character to pad on left and right of signature can be ' ', or '|'  etc
       }
    end
+end
+
+M.vimwiki = function()
+  local g = vim.g
+
+  g.vimwiki_list = {{
+    path  = '~/vimwiki/',
+    syntax = 'markdown',
+    ext = '.md',
+  },}
 end
 
 return M
