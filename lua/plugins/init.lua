@@ -282,5 +282,13 @@ return packer.startup(function()
 
    use { "github/copilot.vim" }
 
+--    use { "sbdchd/neoformat" }
+
+   use {
+     "jose-elias-alvarez/null-ls.nvim",
+     after = "nvim-lspconfig",
+     config = override_req("null-ls", "plugins.configs.null-ls"),
+   }
+
    require("core.hooks").run("install_plugins", use)
 end)

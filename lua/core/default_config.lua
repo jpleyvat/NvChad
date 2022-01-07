@@ -73,6 +73,7 @@ M.plugins = {
       cmp = true,
       nvimtree = true,
       autopairs = true,
+      null_ls = true,
    },
    options = {
       lspconfig = {
