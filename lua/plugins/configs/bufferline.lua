@@ -10,7 +10,6 @@ bufferline.setup {
       offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
       buffer_close_icon = "",
       modified_icon = "",
-      -- close_icon = "%@NvChad_bufferline_quitvim@%X",
       close_icon = "",
       show_close_icon = true,
       left_trunc_marker = "",
@@ -36,12 +35,11 @@ bufferline.setup {
                return false
             elseif type == "hori" then
                return false
-            else
-               return true
             end
-         else
             return true
          end
+
+         return true
       end,
    },
 
@@ -121,6 +119,7 @@ bufferline.setup {
          guifg = colors.black2,
          guibg = colors.black2,
       },
+
       -- tabs
       tab = {
          guifg = colors.light_grey,
