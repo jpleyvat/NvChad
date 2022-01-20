@@ -243,14 +243,14 @@ return packer.startup(function()
 
    use { "github/copilot.vim" }
 
---    use { "sbdchd/neoformat" }
+   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
 
    use {
+     disable = not plugin_settings.status.null_ls,
      "jose-elias-alvarez/null-ls.nvim",
      after = "nvim-lspconfig",
      config = override_req("null-ls", "plugins.configs.null-ls"),
    }
-   -- require("core.hooks").run("install_plugins", use)
 
    -- load user defined plugins
    require("core.customPlugins").run(use)

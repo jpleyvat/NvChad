@@ -81,6 +81,26 @@ M.misc = function()
   -- =====================================================================================
   -- Normal mode remaps
   -- =====================================================================================
+    -------------------------------
+    -- Fold.
+    -------------------------------
+      -- javascript
+      map('', '<leader>z', [[$V%zf]], {silent=true})
+    -------------------------------
+    -- Format.
+    -------------------------------
+      -- javascript
+      map('', '<leader>fm', [[:exec '!standard --fix % &> /dev/null'<CR>]], {silent=true, noremap=true})
+    -------------------------------
+    -- Lint.
+    -------------------------------
+      -- function GotoWindow(window)
+      --   vim.call('win_gotoid', window)
+      --   vim.cmd(':MaximizerToggle')
+      -- end
+      map('', '<leader>ll', [[:lua vim.diagnostic.show()<CR>]], {silent=true})
+      map('', '<leader>lh', [[:lua vim.diagnostic.hide()<CR>]], {silent=true})
+
     map('n', '<leader>r', ':NvimTreeRefresh<CR>', {silent = true})
     -- map('n', '<leader>n', ':NvimTreeFindFile<CR>', {silent = true})
     -------------------------------
@@ -284,9 +304,9 @@ M.nvimtree = function()
    -- map("n", plugin_maps.nvimtree.focus, ":NvimTreeFocus <CR>")
 end
 
-M.neoformat = function()
-   map("n", plugin_maps.neoformat.format, ":Neoformat <CR>")
-end
+-- M.neoformat = function()
+--    map("n", plugin_maps.neoformat.format, ":Neoformat <CR>")
+-- end
 
 M.telescope = function()
    local m = plugin_maps.telescope

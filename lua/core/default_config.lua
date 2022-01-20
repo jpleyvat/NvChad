@@ -27,6 +27,9 @@ M.options = {
    updatetime = 250,
    undofile = true,
    fillchars = { eob = " " },
+   foldmethod = 'syntax',
+   foldlevel = 1,
+   foldclose = 'all',
 
    -- NvChad options
    nvChad = {
