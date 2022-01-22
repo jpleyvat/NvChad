@@ -223,27 +223,17 @@ return packer.startup(function()
       end,
    }
 
-   -- Lint
-   use { 'mfussenegger/nvim-lint' }
-
-   use { 
-     "vimwiki/vimwiki" ,
-      config = override_req("vimwiki", "(plugins.configs.others).vimwiki()"),
+   -- use { "liuchengxu/vim-which-key" }
+   use {
+     "folke/which-key.nvim",
+     config = override_req("which_key", "(plugins.configs.others).which_key()"),
    }
 
-   use { "puremourning/vimspector" }
-
-   use { "mattn/emmet-vim" }
-
-   use { "liuchengxu/vim-which-key" }
-
-   use { "tomlion/vim-solidity" }
-
-   use { "szw/vim-maximizer" }
-
-   use { "github/copilot.vim" }
-
-   use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+   use { 
+     'sindrets/diffview.nvim',
+     requires = 'nvim-lua/plenary.nvim',
+     -- config = override_req("diffview", "(plugins.configs.others).diffview()"),
+   }
 
    use {
      disable = not plugin_settings.status.null_ls,
@@ -251,6 +241,24 @@ return packer.startup(function()
      after = "nvim-lspconfig",
      config = override_req("null-ls", "plugins.configs.null-ls"),
    }
+
+   use { 
+     "vimwiki/vimwiki" ,
+      config = override_req("vimwiki", "(plugins.configs.others).vimwiki()"),
+   }
+
+   -- Lint
+   use { 'mfussenegger/nvim-lint' }
+
+   use { "puremourning/vimspector" }
+
+   use { "mattn/emmet-vim" }
+
+   use { "tomlion/vim-solidity" }
+
+   use { "szw/vim-maximizer" }
+
+   use { "github/copilot.vim" }
 
    -- load user defined plugins
    require("core.customPlugins").run(use)

@@ -94,15 +94,19 @@ M.misc = function()
     -------------------------------
     -- Lint.
     -------------------------------
-      -- function GotoWindow(window)
-      --   vim.call('win_gotoid', window)
-      --   vim.cmd(':MaximizerToggle')
-      -- end
       map('', '<leader>ll', [[:lua vim.diagnostic.show()<CR>]], {silent=true})
       map('', '<leader>lh', [[:lua vim.diagnostic.hide()<CR>]], {silent=true})
+    -------------------------------
+    -- Git.
+    -------------------------------
+      map('', '<leader>gj', ':Gitsigns next_hunk<CR>', {silent=true, noremap=true})
+      map('', '<leader>gl', ':Gitsigns prev_hunk<CR>', {silent=true, noremap=true})
+      map('', '<leader>gp', ':Gitsigns preview_hunk<CR>', {silent=true, noremap=true})
+      map('', '<leader>gg', ':DiffviewOpen<CR>', {silent=true, noremap=true})
+      map('', '<leader>ge', ':DiffviewClose<CR>', {silent=true, noremap=true})
+      map('', '<leader>gh', ':DiffviewFileHistory<CR>', {silent=true, noremap=true})
 
     map('n', '<leader>r', ':NvimTreeRefresh<CR>', {silent = true})
-    -- map('n', '<leader>n', ':NvimTreeFindFile<CR>', {silent = true})
     -------------------------------
     -- Replace all is aliased to S.
     -------------------------------
@@ -180,7 +184,7 @@ M.misc = function()
 
     map('', '<leader>ep', [[:w<CR>:exec '!python3' shellescape(@%, 1)<CR>]], {silent=true})
     map('', '<leader>en', [[:w<CR>:exec '!node' shellescape(@%, 1)<CR>]], {silent=true})
-    map('n', '<leader>', [[:WhichKey '<Space>'<CR>]], {silent})
+    -- map('n', '<leader>', [[:WhichKey '<Space>'<CR>]], {silent})
    end
 
    local function required_mappings()

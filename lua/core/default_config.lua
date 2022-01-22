@@ -23,7 +23,7 @@ M.options = {
    shiftwidth = 2,
    smartindent = true,
    tabstop = 8,
-   timeoutlen = 400,
+   timeoutlen = 300,
    updatetime = 250,
    undofile = true,
    fillchars = { eob = " " },

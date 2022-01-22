@@ -171,4 +171,12 @@ M.gitsigns = function()
    end
 end
 
+M.which_key = function()
+   local present, which_key = pcall(require, "which-key")
+   if present then
+     which_key.setup {
+     }
+   end
+end
+
 return M
