@@ -30,6 +30,7 @@ M.options = {
    foldmethod = 'syntax',
    foldlevel = 1,
    foldclose = 'all',
+   shadafile = vim.opt.shadafile,
 
    -- NvChad options
    nvChad = {
@@ -73,17 +74,26 @@ M.plugins = {
       telescope_media = true, -- media previews within telescope finders
       vim_matchup = true, -- % operator enhancements
       cmp = true,
+      snippets = true,
       nvimtree = true,
       autopairs = true,
       null_ls = true,
    },
    options = {
+      packer = {
+         init_file = "plugins.packerInit",
+      },
       autopairs = { loadAfter = "nvim-cmp" },
+      cmp = {
+         lazy_load = true,
+      },
       lspconfig = {
          setup_lspconf = "", -- path of file containing setups of different lsps
       },
       nvimtree = {
          enable_git = 1,
+         -- packerCompile required after changing lazy_load
+         lazy_load = true,
       },
       luasnip = {
          snippet_path = {},
@@ -105,6 +115,8 @@ M.plugins = {
       esc_insertmode_timeout = 300,
    },
    default_plugin_config_replace = {},
+   default_plugin_remove = {},
+   install = nil,
 }
 
 -- Don't use a single keymap twice
@@ -129,7 +141,9 @@ M.mappings = {
       cheatsheet = "<leader>ch",
       close_buffer = "<leader>x",
       copy_whole_file = "<C-a>", -- copy all contents of current buffer
+      copy_to_system_clipboard = "<C-c>", -- copy selected text (visual mode) or curent line (normal)
       line_number_toggle = "<leader>n", -- toggle line number
+      relative_line_number_toggle = "<leader>rn",
       update_nvchad = "<leader>uu",
       new_buffer = "<S-t>",
       new_tab = "<C-t>b",
@@ -175,7 +189,7 @@ M.mappings = {
 }
 
 -- plugins related mappings
-
+-- To disable a mapping, equate the variable to "" or false or nil in chadrc
 M.mappings.plugins = {
    bufferline = {
       -- next_buffer = "<TAB>", -- next buffer
@@ -208,7 +222,7 @@ M.mappings.plugins = {
       remove_workspace_folder = "<leader>wr",
       list_workspace_folders = "<leader>wl",
       type_definition = "<leader>D",
-      rename = "<leader>rn",
+      rename = "<leader>ra",
       code_action = "<leader>ca",
       references = "gr",
       float_diagnostics = "ge",

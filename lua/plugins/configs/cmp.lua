@@ -4,18 +4,21 @@ if not present then
    return
 end
 
-vim.opt.completeopt = "menuone,noselect"
+local snippets_status = require("core.utils").load_config().plugins.status.snippets
 
-local press = function(key)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), "n", true)
-end
-
--- nvim-cmp setup
-cmp.setup {
-   snippet = {
+local default = {
+   completion = {
+      completeopt = "menuone,noselect",
+   },
+   documentation = {
+      border = "single",
+   },
+   snippet = (snippets_status and {
       expand = function(args)
          require("luasnip").lsp_expand(args.body)
       end,
+   }) or {
+      expand = function(_) end,
    },
    formatting = {
       format = function(entry, vim_item)
@@ -23,9 +26,10 @@ cmp.setup {
          vim_item.kind = string.format("%s %s", icons[vim_item.kind], vim_item.kind)
 
          vim_item.menu = ({
+            buffer = "[BUF]",
             nvim_lsp = "[LSP]",
             nvim_lua = "[Lua]",
-            buffer = "[BUF]",
+            path = "[Path]",
          })[entry.source.name]
 
          return vim_item
@@ -52,15 +56,29 @@ cmp.setup {
       --       press("<Tab>")
       --    end
       -- end,
-      ["<S-Tab>"] = function(fallback)
+      -- ["<S-Tab>"] = function(fallback)
+      --    if cmp.visible() then
+      --       cmp.select_prev_item()
+      --    elseif require("luasnip").jumpable(-1) then
+      --       vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+      ["<Tab>"] = cmp.mapping(function(fallback)
          if cmp.visible() then
-            cmp.select_prev_item()
-         -- elseif require("luasnip").jumpable(-1) then
-         --    vim.fn.feedkeys(vim.api.nvim_replace_termcodes("<Plug>luasnip-jump-prev", true, true, true), "")
+            cmp.select_next_item()
+         elseif snippets_status and require("luasnip").expand_or_jumpable() then
+            require("luasnip").expand_or_jump()
          else
             fallback()
          end
-      end,
+      end, { "i", "s" }),
+      ["<S-Tab>"] = cmp.mapping(function(fallback)
+         if cmp.visible() then
+            cmp.select_prev_item()
+         elseif require("luasnip").jumpable(-1) then
+            require("luasnip").jump(-1)
+         else
+            fallback()
+         end
+      end, { "i", "s" }),
    },
    sources = {
       { name = "nvim_lsp" },
@@ -70,3 +88,13 @@ cmp.setup {
       { name = "path" },
    },
 }
+
+local M = {}
+M.setup = function(override_flag)
+   if override_flag then
+      default = require("core.utils").tbl_override_req("nvim_cmp", default)
+   end
+   cmp.setup(default)
+end
+
+return M
