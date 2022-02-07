@@ -58,14 +58,14 @@ local default = {
    disable_netrw = true,
    hijack_netrw = true,
    ignore_ft_on_setup = { "dashboard", ".git", "node_modules", ".cache" },
-   auto_close = true,
+   auto_close = false,
    open_on_tab = false,
    hijack_cursor = true,
    update_cwd = true,
    update_focused_file = {
       enable = true,
       update_cwd = false,
-      ignore_list = { ".git", "node_modules", ".cache" },
+      ignore_list = { ".git", "node_modules", ".cache", "__pycache__" },
    },
    view = {
       allow_resize = true,
@@ -74,9 +74,14 @@ local default = {
       hide_root_folder = true,
    },
    git = {
-      enable = false,
-      ignore = false,
+      enable = true,
+      ignore = true,
    },
+   actions = {
+    open_file = {
+      quit_on_open = true,
+    }
+  }
 }
 
 local M = {}

@@ -17,11 +17,11 @@ vim.cmd [[ autocmd BufEnter,BufRead,BufWinEnter,FileType,WinEnter * lua require(
 -- vim.cmd [[ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 ]]
 
 
+-- default filetype
 vim.cmd [[
-  " default filetype
   let g:do_filetype = 0
   au BufWinEnter,BufAdd * if expand('<afile>') == "" | let g:do_filetype = 1 | endif
-  au BufEnter vimspector.* if g:do_filetype | setf python | endif
+  au BufEnter vimspector.* if g:do_filetype | set syntax=javascript | endif
 ]]
 
 -- vim.cmd [[
