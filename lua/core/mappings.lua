@@ -27,7 +27,7 @@ local M = {}
 M.misc = function()
    local function non_config_mappings()
       -- Don't copy the replaced text after pasting in visual mode
-      map_wrapper("v", "p", '"_dP')
+      map_wrapper("v", "p", "p:let @+=@0<CR>")
 
       -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
       -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
@@ -210,13 +210,11 @@ M.misc = function()
    local function required_mappings()
       map("n", maps.misc.cheatsheet, ":lua require('nvchad.cheatsheet').show() <CR>") -- show keybinds
       map("n", maps.misc.close_buffer, ":lua require('core.utils').close_buffer() <CR>") -- close  buffer
-      map("n", maps.misc.copy_whole_file, ":%y+ <CR>") -- copy whole file content
-      map("v", maps.misc.copy_to_system_clipboard, '"+y')
-      map("n", maps.misc.copy_to_system_clipboard, '"+yy') -- copy curent line in normal mode
+      map("n", maps.misc.cp_whole_file, ":%y+ <CR>") -- copy whole file content
       map("n", maps.misc.new_buffer, ":enew <CR>") -- new buffer
       map("n", maps.misc.new_tab, ":tabnew <CR>") -- new tabs
-      map("n", maps.misc.line_number_toggle, ":set nu! <CR>") -- toggle numbers
-      map("n", maps.misc.relative_line_number_toggle, ":set rnu! <CR>") -- toggle relative numbers
+      map("n", maps.misc.lineNR_toggle, ":set nu! <CR>")
+      map("n", maps.misc.lineNR_rel_toggle, ":set rnu! <CR>") -- relative line numbers
       map("n", maps.misc.save_file, ":w <CR>") -- ctrl + s to save file
 
       -- terminal mappings --
@@ -281,16 +279,6 @@ M.comment = function()
    local m = plugin_maps.comment.toggle
    map("n", m, ":lua require('Comment.api').toggle_current_linewise()<CR>")
    map("v", m, ":lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>")
-end
-
-M.dashboard = function()
-   local m = plugin_maps.dashboard
-
-   map("n", m.bookmarks, ":DashboardJumpMarks <CR>")
-   map("n", m.new_file, ":DashboardNewFile <CR>")
-   map("n", m.open, ":Dashboard <CR>")
-   map("n", m.session_load, ":SessionLoad <CR>")
-   map("n", m.session_save, ":SessionSave <CR>")
 end
 
 M.lspconfig = function()
