@@ -226,7 +226,6 @@ local plugins = {
    {
      "folke/which-key.nvim",
      config = override_req("signature", "plugins.configs.others", "which_key"),
-
    },
 
    { 
