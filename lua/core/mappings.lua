@@ -110,7 +110,7 @@ M.misc = function()
     -- Git.
     -------------------------------
       map('', '<leader>gj', ':Gitsigns next_hunk<CR>', {silent=true, noremap=true})
-      map('', '<leader>gl', ':Gitsigns prev_hunk<CR>', {silent=true, noremap=true})
+      map('', '<leader>gk', ':Gitsigns prev_hunk<CR>', {silent=true, noremap=true})
       map('', '<leader>gp', ':Gitsigns preview_hunk<CR>', {silent=true, noremap=true})
       map('', '<leader>gg', ':DiffviewOpen<CR>', {silent=true, noremap=true})
       map('', '<leader>ge', ':DiffviewClose<CR>', {silent=true, noremap=true})
@@ -120,7 +120,7 @@ M.misc = function()
     -------------------------------
     -- Replace all is aliased to S.
     -------------------------------
-     map('v', 'S', ':%s//g<Left><Left>', {noremap = true})
+     map('', 'S', ':%s//g<Left><Left>', {noremap = true})
     ---------------------------
     -- Move section up and down
     ---------------------------
