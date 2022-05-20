@@ -4,20 +4,20 @@ if not present then
    return
 end
 
+-- globals must be set prior to requiring nvim-tree to function
 local g = vim.g
 
 vim.o.termguicolors = true
 
 g.nvim_tree_add_trailing = 0 -- append a trailing slash to folder names
 g.nvim_tree_git_hl = 1
-g.nvim_tree_highlight_opened_files = 1
-g.nvim_tree_indent_markers = 1
-g.nvim_tree_root_folder_modifier = table.concat { ":t:gs?$?/..", string.rep(" ", 1000), "?:gs?^??" }
+g.nvim_tree_highlight_opened_files = 0
 
 g.nvim_tree_show_icons = {
    folders = 1,
    files = 1,
    git = 1,
+   folder_arrows = 1,
 }
 
 g.nvim_tree_icons = {
@@ -39,17 +39,19 @@ g.nvim_tree_icons = {
       open = "",
       symlink = "",
       symlink_open = "",
+      arrow_open = "",
+      arrow_closed = "",
    },
 }
 
-local default = {
+local options = {
    filters = {
       dotfiles = false,
+      exclude = { "custom" },
    },
    disable_netrw = true,
    hijack_netrw = true,
-   ignore_ft_on_setup = { "dashboard", ".git", "node_modules", ".cache" },
-   auto_close = false,
+   ignore_ft_on_setup = { "dashboard" },
    open_on_tab = false,
    hijack_cursor = true,
    hijack_unnamed_buffer_when_opening = false,
@@ -60,29 +62,27 @@ local default = {
       ignore_list = { ".git", "node_modules", ".cache", "__pycache__" },
    },
    view = {
-      allow_resize = true,
       side = "left",
       width = 25,
       hide_root_folder = true,
    },
    git = {
-      enable = true,
+      enable = false,
       ignore = true,
    },
    actions = {
-    open_file = {
-      quit_on_open = true,
-    }
-  }
+      open_file = {
+         resize_window = true,
+      },
+   },
+   renderer = {
+      indent_markers = {
+         enable = false,
+      },
+   },
 }
 
-local M = {}
+-- check for any override
+options = nvchad.load_override(options, "kyazdani42/nvim-tree.lua")
 
-M.setup = function(override_flag)
-   if override_flag then
-      default = require("core.utils").tbl_override_req("nvim_tree", default)
-   end
-   nvimtree.setup(default)
-end
-
-return M
+nvimtree.setup(options)
