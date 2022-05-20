@@ -125,24 +125,12 @@ M.plugins = {
 
 -- non plugin
 M.mappings = {
-   -- custom = {}, -- all custom user mappings
-   -- close current focused buffer
-   close_buffer = "<leader>x",
-   copy_whole_file = "<C-a>", -- copy all contents of the current buffer
-   line_number_toggle = "<leader>nn", -- show or hide line number
-   relative_number_toggle = "<leader>nr", -- show or hide line number
-   new_buffer = "<S-t>", -- open a new buffer
-   new_tab = "<C-t>b", -- open a new vim tab
-   save_file = "<C-s>", -- save file using :w
-   theme_toggler = "<leader>tt", -- for theme toggler, see in ui.theme_toggler
-   -- custom = {}, -- custom user mappings
-
    misc = {
       cheatsheet = "<leader>ch",
       close_buffer = "<leader>x",
       cp_whole_file = "<C-a>", -- copy all contents of current buffer
-      lineNR_toggle = "<leader>n", -- toggle line number
-      lineNR_rel_toggle = "<leader>rn",
+      lineNR_toggle = "<leader>nn", -- toggle line number
+      lineNR_rel_toggle = "<leader>nr",
       update_nvchad = "<leader>uu",
       new_buffer = "<S-t>",
       new_tab = "<C-t>b",

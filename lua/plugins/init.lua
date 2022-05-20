@@ -257,6 +257,9 @@ local plugins = {
    { "szw/vim-maximizer" },
 
    { "github/copilot.vim" },
+
+   -- { "neoclide/coc.nvim" },
+
 }
 
 --label plugins for operational assistance

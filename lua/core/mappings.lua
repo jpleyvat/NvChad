@@ -134,11 +134,11 @@ M.misc = function()
     ---------------
     -- Resize split
     ---------------
-    map('n', '<C-M-j>', ':resize-1<CR>', {silent = true})
-    map('n', '<C-M-k>', ':resize+1<CR>', {silent = true})
+    map('n', '<C-j>', ':resize-1<CR>', {silent = true})
+    map('n', '<C-k>', ':resize+1<CR>', {silent = true})
 
-    map('n', '<C-M-h>', ':vertical resize-1<CR>', {silent = true})
-    map('n', '<C-M-l>', ':vertical resize+1<CR>', {silent = true})
+    map('n', '<C-h>', ':vertical resize-1<CR>', {silent = true})
+    map('n', '<C-l>', ':vertical resize+1<CR>', {silent = true})
 
     map('n', '<leader>m', ':MaximizerToggle<CR>', {silent = true})
     -------------
@@ -177,6 +177,8 @@ M.misc = function()
     -- map('n', '<leader>dbl', ':call vimspector#CleanLineBreakpoint()<CR>', {silent = true})
     map('n', '<leader>dbc', ':call vimspector#ClearBreakpoints()<CR>', {silent = true})
     -- map('n', '<leader>dcbp', '<Plug>Vimspector ToggleConditionalBreakpoint', {silent = true})
+
+    map('n', 'gd', '<Plug>(coc-definition)', {silent = true})
     -- =====================================================================================
     -- Visual mode remaps
     -- =====================================================================================
