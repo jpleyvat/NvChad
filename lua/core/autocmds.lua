@@ -51,11 +51,11 @@ autocmd("BufUnload", {
 
 
 -- default filetype
-vim.cmd [[
-  let g:do_filetype = 0
-  au BufWinEnter,BufAdd * if expand('<afile>') == "" | let g:do_filetype = 1 | endif
-  au BufEnter vimspector.* if g:do_filetype | set syntax=javascript | endif
-]]
+-- vim.cmd [[
+--   let g:do_filetype = 0
+--   au BufWinEnter,BufAdd * if expand('<afile>') == "" | let g:do_filetype = 1 | endif
+--   au BufEnter vimspector.* if g:do_filetype | set syntax=javascript | endif
+-- ]]
 
 -- vim.cmd [[
 --   augroup formatting 

@@ -52,7 +52,7 @@ local options = {
    disable_netrw = true,
    hijack_netrw = true,
    ignore_ft_on_setup = { "dashboard" },
-   open_on_tab = false,
+   open_on_tab = true,
    hijack_cursor = true,
    hijack_unnamed_buffer_when_opening = false,
    update_cwd = true,
@@ -67,12 +67,13 @@ local options = {
       hide_root_folder = true,
    },
    git = {
-      enable = false,
+      enable = true,
       ignore = true,
    },
    actions = {
       open_file = {
          resize_window = true,
+         quit_on_open = true,
       },
    },
    renderer = {

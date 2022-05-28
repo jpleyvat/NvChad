@@ -218,44 +218,29 @@ local plugins = {
       end,
    },
 
-   -- use { "liuchengxu/vim-which-key" }
-   {
-     "folke/which-key.nvim",
-     config = override_req("signature", "plugins.configs.others", "which_key"),
+   ["sindrets/diffview.nvim"] = {
+      requires = 'nvim-lua/plenary.nvim'
    },
 
-   { 
-     'sindrets/diffview.nvim',
-     requires = 'nvim-lua/plenary.nvim',
+   ["vimwiki/vimwiki"] = {
+      config = function()
+         require("plugins.configs.others").vimwiki()
+      end,
    },
 
-   { 
-      disable = not plugin_settings.status.null_ls,
-     "jose-elias-alvarez/null-ls.nvim",
-     after = "nvim-lspconfig",
-   },
+   ["puremourning/vimspector"] = {},
 
-   { 
-      "vimwiki/vimwiki" ,
-      config = override_req("signature", "plugins.configs.others", "vimwiki"),
+   ["mattn/emmet-vim"] = {},
 
-   },
+   [ "tomlion/vim-solidity" ] = {},
 
-   -- Lint
-   { 'mfussenegger/nvim-lint' },
+   [ "szw/vim-maximizer" ] ={},
 
-   { "puremourning/vimspector" },
+   [ "github/copilot.vim" ] = {},
 
-   { "mattn/emmet-vim" },
+   [ "kylechui/nvim-surround" ] = {},
 
-   { "tomlion/vim-solidity" },
-
-   { "szw/vim-maximizer" },
-
-   { "github/copilot.vim" },
-
-   -- { "neoclide/coc.nvim" },
-
+   -- { 'mfussenegger/nvim-lint' },
 }
 
 plugins = nvchad.remove_default_plugins(plugins)

@@ -4,139 +4,17 @@ local function termcodes(str)
    return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
+local formatters = {
+  ['javascript'] = ":exec '!standard --fix % &> /dev/null'<CR>",
+  ['typescript'] = ":exec '!ts-standard --fix % &> /dev/null'<CR>",
+  ['typescriptreact'] = ":exec '!ts-standard --fix % &> /dev/null'<CR>"
+}
+
 local M = {}
-
-   -- map("n", wnav.moveLeft, "<C-w>h")
-   -- map("n", wnav.moveRight, "<C-w>l")
-   -- map("n", wnav.moveUp, "<C-w>k")
-   -- map("n", wnav.moveDown, "<C-w>j")
-
---   -- =====================================================================================
---   -- Normal mode remaps
---   -- =====================================================================================
---     -------------------------------
---     -- Fold.
---     -------------------------------
---       -- javascript
---       map('', '<leader>z', [[$V%zf]], {silent=true})
---     -------------------------------
---     -- Format.
---     -------------------------------
---       -- javascript
---       map('', '<leader>fm', [[:exec '!standard --fix % &> /dev/null'<CR>]], {silent=true, noremap=true})
---     -------------------------------
---     -- Lint.
---     -------------------------------
---       map('', '<leader>ll', [[:lua vim.diagnostic.show()<CR>]], {silent=true})
---       map('', '<leader>lh', [[:lua vim.diagnostic.hide()<CR>]], {silent=true})
---     -------------------------------
---     -- Git.
---     -------------------------------
---       map('', '<leader>gj', ':Gitsigns next_hunk<CR>', {silent=true, noremap=true})
---       map('', '<leader>gk', ':Gitsigns prev_hunk<CR>', {silent=true, noremap=true})
---       map('', '<leader>gp', ':Gitsigns preview_hunk<CR>', {silent=true, noremap=true})
---       map('', '<leader>gg', ':DiffviewOpen<CR>', {silent=true, noremap=true})
---       map('', '<leader>ge', ':DiffviewClose<CR>', {silent=true, noremap=true})
---       map('', '<leader>gh', ':DiffviewFileHistory<CR>', {silent=true, noremap=true})
-
---     map('n', '<leader>r', ':NvimTreeRefresh<CR>', {silent = true})
---     -------------------------------
---     -- Replace all is aliased to S.
---     -------------------------------
---      map('', 'S', ':%s//g<Left><Left>', {noremap = true})
---     ---------------------------
---     -- Move section up and down
---     ---------------------------
---     map('n', '<M-j>', 'ddp', {silent = true})
---     map('n', '<M-k>', 'ddkP', {silent = true})
---     -----------------
---     -- Indent outdent
---     -----------------
---     map('n', '>', 'V>', {silent=true})
---     map('n', '<', 'V<', {silent=true})
---     ---------------
---     -- Resize split
---     ---------------
---     map('n', '<C-j>', ':resize-1<CR>', {silent = true})
---     map('n', '<C-k>', ':resize+1<CR>', {silent = true})
-
---     map('n', '<C-h>', ':vertical resize-1<CR>', {silent = true})
---     map('n', '<C-l>', ':vertical resize+1<CR>', {silent = true})
-
---     map('n', '<leader>m', ':MaximizerToggle<CR>', {silent = true})
---     -------------
---     -- Vimspector
---     -------------
-
---     function GotoWindow(window)
---       vim.call('win_gotoid', window)
---       vim.cmd(':MaximizerToggle')
---     end
-
---     map('n', '<leader>dd', ':call vimspector#Launch()<CR>', {silent = true})
---     map('n', '<leader>de', ':call vimspector#Reset()<CR>', {silent = true})
-
---     -- Windows
---     map('n', '<leader>dc', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.code)<CR>', {silent = true})
---     map('n', '<leader>dt', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.tagpage)<CR>', {silent = true})
---     map('n', '<leader>dv', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.variables)<CR>', {silent = true}) 
---     map('n', '<leader>dw', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.watches)<CR>', {silent = true}) 
---     map('n', '<leader>ds', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.stack_trace)<CR>', {silent = true})
---     map('n', '<leader>do', '<Cmd>lua GotoWindow(vim.g.vimspector_session_windows.output)<CR>', {silent = true}) 
-
-
---     map('n', '<leader>d<space>', ':call vimspector#Continue()<CR>', {silent = true})
-
---     map('n', '<leader>dl', '<Plug>VimspectorStepInto', {silent = true})
---     map('n', '<leader>dj', '<Plug>VimspectorStepover', {silent = true})
-
---     map('n', '<leader>dk', '<Plug>VimspectorStepOut', {silent = true})
---     map('n', '<leader>d_', '<Plug>VimspectorRestart', {silent = true})
-
---     map('n', '<leader>drc', ':call vimspector#RunToCursor()<CR>', {silent = true})
-
---     -- Breakpoints
---     map('n', '<leader>dbp', ':call vimspector#ToggleBreakpoint()<CR>', {silent = true})
---     -- map('n', '<leader>dbl', ':call vimspector#CleanLineBreakpoint()<CR>', {silent = true})
---     map('n', '<leader>dbc', ':call vimspector#ClearBreakpoints()<CR>', {silent = true})
---     -- map('n', '<leader>dcbp', '<Plug>Vimspector ToggleConditionalBreakpoint', {silent = true})
-
---     map('n', 'gd', '<Plug>(coc-definition)', {silent = true})
---     -- =====================================================================================
---     -- Visual mode remaps
---     -- =====================================================================================
---     map('v', '>', '>gv', {silent = true})
---     map('v', '<', '<gv', {silent = true})
-
---     map('v', '(', 'o<ESC>i(<ESC>gvol<ESC>a)<ESC>', {silent = true})
---     map('v', '{', 'o<ESC>i{<ESC>gvol<ESC>a}<ESC>', {silent = true})
---     map('v', '[', 'o<ESC>i[<ESC>gvol<ESC>a]<ESC>', {silent = true})
-
---     map('v', [["]], [[o<ESC>i"<ESC>gvol<ESC>a"<ESC>]], {silent = true})
---     map('v', [[']], [[o<ESC>i'<ESC>gvol<ESC>a'<ESC>]], {silent = true})
---     map('v', [[`]], [[o<ESC>i`<ESC>gvol<ESC>a`<ESC>]], {silent = true})
-
-
---     map('', '<leader>ep', [[:w<CR>:exec '!python3' shellescape(@%, 1)<CR>]], {silent=true})
---     map('', '<leader>en', [[:w<CR>:exec '!node' shellescape(@%, 1)<CR>]], {silent=true})
---     -- map('n', '<leader>', [[:WhichKey '<Space>'<CR>]], {silent})
---    -- end
-
-   local function required_mappings()
-      map("n", maps.close_buffer, ":lua require('core.utils').close_buffer() <CR>") -- close  buffer
-      map("n", maps.copy_whole_file, ":%y+ <CR>") -- copy whole file content
-      map("n", maps.new_buffer, ":enew <CR>") -- new buffer
-      map("n", maps.new_tab, ":tabnew <CR>") -- new tabs
-      map("n", maps.line_number_toggle, ":set nu! rnu!<CR>") -- toggle numbers
-      map("n", maps.relative_number_toggle, ":set rnu! <CR>") -- toggle numbers
-      map("n", maps.save_file, ":w <CR>") -- ctrl + s to save file
-   end
 
 M.general = {
 
-
    i = {
-
       -- go to  beginning and end
       ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
       ["<C-e>"] = { "<End>", "壟 end of line" },
@@ -151,10 +29,10 @@ M.general = {
    n = {
 
       -- switch between windows
-      ["<C-h>"] = { "<C-w>h", " window left" },
-      ["<C-l>"] = { "<C-w>l", " window right" },
-      ["<C-j>"] = { "<C-w>j", " window down" },
-      ["<C-k>"] = { "<C-w>k", " window up" },
+      -- ["<C-h>"] = { "<C-w>h", " window left" },
+      -- ["<C-l>"] = { "<C-w>l", " window right" },
+      -- ["<C-j>"] = { "<C-w>j", " window down" },
+      -- ["<C-k>"] = { "<C-w>k", " window up" },
 
       -- save
       ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
@@ -163,22 +41,13 @@ M.general = {
       ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
 
       -- line numbers
-      ["<leader>n"] = { "<cmd> set nu! <CR>", "   toggle line number" },
-      ["<leader>rn"] = { "<cmd> set rnu! <CR>", "   toggle relative number" },
+      ["<leader>nn"] = { "<cmd> set nornu nonu <CR>", "   toggle line number" },
+      ["<leader>nu"] = { "<cmd> set nornu nu! <CR>", "   toggle line number" },
+      ["<leader>nr"] = { "<cmd> set nonu rnu! <CR>", "   toggle relative number" },
 
       -- update nvchad
       ["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
 
-      -- end
-
-      -- check the theme toggler
-      -- if nvChad_options.theme_toggler then
-      --    map(
-      --       "n",
-      --       maps.theme_toggler,
-      --       ":lua require('nvchad').toggle_theme(require('core.utils').load_config().ui.theme_toggler) <CR>"
-      --    )
-      -- end
       ["<leader>tt"] = {
          function()
             require("base46").toggle_theme()
@@ -186,6 +55,52 @@ M.general = {
 
          "   toggle theme",
       },
+
+      ["<leader>z"] = { "[[$V%zf]]", "論 fold" },
+
+      ["<leader>fj"] = { ":exec '!standard --fix % &> /dev/null'<CR>", "論 format standard" },
+      ["<leader>ft"] = { ":exec '!ts-standard --fix % &> /dev/null'<CR>", "論 format standard" },
+
+      -- Git
+      ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '論 git hunk down' },
+      ['<leader>gk'] = { ':Gitsigns prev_hunk<CR>', '論 git hunk up' },
+
+      ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '論 git hunk sign' },
+      ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>', '論 git hunk reset' },
+
+      ['<leader>gp'] = { ':Gitsigns preview_hunk<CR>', '論git preview' },
+      ['<leader>gg'] = { ':DiffviewOpen<CR>', '論git diff open' },
+      ['<leader>ge'] = { ':DiffviewClose<CR>', '論git diff close' },
+      ['<leader>gh'] = { ':DiffviewFileHistory<CR>', '論git diff history' },
+
+      ['S'] = {':%s//g<Left><Left>', '論replace all'},
+
+    ['<leader>r']  = { ':NvimTreeRefresh<CR>', '論refresh nvimtree'},
+
+    ['<M-j>'] = { 'ddp', '論move line down' },
+    ['<M-k>'] = { 'ddkP', '論move line up' },
+
+    -----------------
+    -- Indent outdent
+    -----------------
+    ['>'] = { 'V>', '論 indent' },
+    ['<'] = { 'V<', '論 outdent' },
+
+    ---------------
+    -- Resize split
+    ---------------
+    ['<C-j>'] = { ':resize-1<CR>', '論shrink' },
+    ['<C-k>'] = { ':resize+1<CR>', '論grow' },
+
+    ['<C-h>'] = { ':vertical resize-1<CR>', '論vertical shrink' },
+    ['<C-l>'] = { ':vertical resize+1<CR>', '論vertical grow' },
+
+    ['<leader>m'] = {':MaximizerToggle<CR>', '論toggle miximize' },
+
+   },
+   v = {
+    ['>'] = {'>gv', '論visual indent'},
+    ['<'] = {'<gv', '論visual outdent'},
    },
 
    t = {
@@ -200,8 +115,10 @@ M.bufferline = {
       ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
 
       -- cycle through buffers
-      ["<TAB>"] = { "<cmd> BufferLineCycleNext <CR>", "  cycle next buffer" },
-      ["<S-Tab>"] = { "<cmd> BufferLineCyclePrev <CR>", "  cycle prev buffer" },
+      -- ["<TAB>"] = { "<cmd> BufferLineCycleNext <CR>", "  cycle next buffer" },
+      -- ["<S-Tab>"] = { "<cmd> BufferLineCyclePrev <CR>", "  cycle prev buffer" },
+      ["<M-.>"] = { "<cmd> BufferLineCycleNext <CR>", "  cycle next buffer" },
+      ["<M-,>"] = { "<cmd> BufferLineCyclePrev <CR>", "  cycle prev buffer" },
 
       -- close buffer + hide terminal buffer
       ["<leader>x"] = {
@@ -210,6 +127,14 @@ M.bufferline = {
          end,
          "   close buffer",
       },
+
+      ["<M-q>"] = {
+         function()
+            nvchad.close_buffer()
+         end,
+         "   close buffer",
+      },
+
    },
 }
 
@@ -477,18 +402,67 @@ M.whichkey = {
    },
 }
 
-M.telescope_media = function()
-   local m = plugin_maps.telescope.telescope_media
-
-   map("n", m.media_files, ":Telescope media_files <CR>")
+function GotoWindow(window)
+  vim.call('win_gotoid', window)
+  vim.cmd(':MaximizerToggle')
 end
 
-M.truezen = function()
-   local m = plugin_maps.truezen
+M.vimspector = {
+    n = {
+      ['<leader>dd'] = {':call vimspector#Launch()<CR>', 'launch vimspector'},
+      ['<leader>de'] = {':call vimspector#Reset()<CR>', 'reset vimspector'},
+      ['<leader>d<space>'] = {':call vimspector#Continue()<CR>', 'continue vimspector'},
 
-   map("n", m.ataraxis_mode, ":TZAtaraxis <CR>")
-   map("n", m.focus_mode, ":TZFocus <CR>")
-   map("n", m.minimalistic_mode, ":TZMinimalist <CR>")
-end
+      ['<leader>dbp'] = {':call vimspector#ToggleBreakpoint()<CR>', ''},
+      ['<leader>dbc'] = {':call vimspector#ClearBreakpoints()<CR>', ''},
+      ['<leader>dbl'] = {':call vimspector#CleanLineBreakpoint()<CR>', ''},
+
+      ['<leader>dl'] = {'<Plug>VimspectorStepInto', ''},
+      ['<leader>dj'] = {'<Plug>VimspectorStepover', ''},
+
+      ['<leader>dk'] = {'<Plug>VimspectorStepOut', ''},
+      ['<leader>d_'] = {'<Plug>VimspectorRestart', ''},
+
+      ['<leader>drc'] = {':call vimspector#RunToCursor()<CR>', ''},
+      ['<leader>dcbp'] = {'<Plug>Vimspector ToggleConditionalBreakpoint', ''},
+
+      ["<leader>dc"] = {
+        function()
+            vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.code)]]
+        end,
+        "   toggle vimspector",
+      },
+      ['<leader>dt'] = {
+        function()
+            vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.tagpage)]]
+        end,
+        "   toggle vimspector",
+      },
+      ['<leader>dv'] = {
+        function()
+            vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.variables)]]
+        end,
+        "   toggle vimspector",
+      },
+      ['<leader>dw'] = {
+        function()
+            vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.watches)]]
+        end,
+        "   toggle vimspector",
+      },
+      ['<leader>ds'] = {
+        function()
+            vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.stack_trace)]]
+        end,
+        "   toggle vimspector",
+      },
+      ['<leader>do'] = {
+        function()
+            vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.output)]]
+        end,
+        "   toggle vimspector",
+      },
+    },
+}
 
 return M
