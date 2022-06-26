@@ -58,8 +58,9 @@ M.general = {
 
       ["<leader>z"] = { "[[$V%zf]]", "論 fold" },
 
-      ["<leader>fj"] = { ":exec '!standard --fix % &> /dev/null'<CR>", "論 format standard" },
-      ["<leader>ft"] = { ":exec '!ts-standard --fix % &> /dev/null'<CR>", "論 format standard" },
+      ["<leader>fs"] = { ":exec '!standard --fix % &> /dev/null'<CR>", "論 format standard" },
+      ["<leader>ft"] = { ":exec '!ts-standard --fix % &> /dev/null'<CR>", "論 format tsstandard" },
+      ["<leader>fp"] = { ":exec '!prettier --write % &> /dev/null'<CR>", "論 format prettier" },
 
       -- Git
       ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '論 git hunk down' },
@@ -74,6 +75,9 @@ M.general = {
       ['<leader>gh'] = { ':DiffviewFileHistory<CR>', '論git diff history' },
 
       ['S'] = {':%s//g<Left><Left>', '論replace all'},
+
+      ['<leader>ep'] = {":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", '論execute python'},
+
 
     ['<leader>r']  = { ':NvimTreeRefresh<CR>', '論refresh nvimtree'},
 
@@ -291,7 +295,7 @@ M.nvimtree = {
       ["<C-n>"] = { "<cmd> NvimTreeToggle <CR>", "   toggle nvimtree" },
 
       -- focus
-      ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
+      -- ["<leader>e"] = { "<cmd> NvimTreeFocus <CR>", "   focus nvimtree" },
    },
 }
 

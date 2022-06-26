@@ -93,7 +93,7 @@ local plugins = {
          nvchad.packer_lazy_load "nvim-lsp-installer"
          -- reload the current file so lsp actually starts for it
          vim.defer_fn(function()
-            vim.cmd 'if &ft == "packer" | echo "" | else | silent! e %'
+            vim.cmd "if &ft == "packer" | echo "" | else | silent! e %"
          end, 0)
       end,
    },
@@ -219,7 +219,7 @@ local plugins = {
    },
 
    ["sindrets/diffview.nvim"] = {
-      requires = 'nvim-lua/plenary.nvim'
+      requires = "nvim-lua/plenary.nvim"
    },
 
    ["vimwiki/vimwiki"] = {
@@ -240,7 +240,7 @@ local plugins = {
 
    [ "kylechui/nvim-surround" ] = {},
 
-   -- { 'mfussenegger/nvim-lint' },
+   [ "sbdchd/neoformat" ] = {},
 }
 
 plugins = nvchad.remove_default_plugins(plugins)
