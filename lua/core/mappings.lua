@@ -4,19 +4,13 @@ local function termcodes(str)
    return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-local formatters = {
-  ['javascript'] = ":exec '!standard --fix % &> /dev/null'<CR>",
-  ['typescript'] = ":exec '!ts-standard --fix % &> /dev/null'<CR>",
-  ['typescriptreact'] = ":exec '!ts-standard --fix % &> /dev/null'<CR>"
-}
-
 local M = {}
 
 M.general = {
 
    i = {
       -- go to  beginning and end
-      ["<C-b>"] = { "<ESC>^i", "論 beginning of line" },
+      ["<C-b>"] = { "<ESC>^i", "  beginning of line" },
       ["<C-e>"] = { "<End>", "壟 end of line" },
 
       -- navigate within insert mode
@@ -58,55 +52,55 @@ M.general = {
          "   toggle theme",
       },
 
-      ["<leader>z"] = { "[[$V%zf]]", "論 fold" },
+      ["<leader>z"] = { "[[$V%zf]]", "祉" },
 
-      ["<leader>fs"] = { ":exec '!standard --fix % &> /dev/null'<CR>", "論 format standard" },
-      ["<leader>ft"] = { ":exec '!ts-standard --fix % &> /dev/null'<CR>", "論 format tsstandard" },
-      ["<leader>fp"] = { ":exec '!prettier --write % &> /dev/null'<CR>", "論 format prettier" },
+      ["<leader>fp"] = { ":exec '!black %'<CR>", " format" },
+      ["<leader>fs"] = { ":exec '!standard --fix %'<CR>", " format" },
+      ["<leader>ft"] = { ":exec '!ts-standard --fix %'<CR>", " format" },
 
       -- Git
-      ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '論 git hunk down' },
-      ['<leader>gk'] = { ':Gitsigns prev_hunk<CR>', '論 git hunk up' },
+      ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '  hunk ' },
+      ['<leader>gk'] = { ':Gitsigns prev_hunk<CR>', '  hunk ' },
 
-      ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '論 git hunk sign' },
-      ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>', '論 git hunk reset' },
+      ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '  hunk sign' },
+      ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>', '  hunk reset' },
 
-      ['<leader>gp'] = { ':Gitsigns preview_hunk<CR>', '論git preview' },
-      ['<leader>gg'] = { ':DiffviewOpen<CR>', '論git diff open' },
-      ['<leader>ge'] = { ':DiffviewClose<CR>', '論git diff close' },
-      ['<leader>gh'] = { ':DiffviewFileHistory<CR>', '論git diff history' },
+      ['<leader>gp'] = { ':Gitsigns preview_hunk<CR>', '  preview' },
+      ['<leader>gg'] = { ':DiffviewOpen<CR>', '  繁 open' },
+      ['<leader>ge'] = { ':DiffviewClose<CR>', '  繁 close' },
+      ['<leader>gh'] = { ':DiffviewFileHistory<CR>', '  diff history' },
 
-      ['S'] = {':%s//g<Left><Left>', '論replace all'},
+      ['S'] = {':%s//g<Left><Left>', ' replace all'},
 
-      ['<leader>ep'] = {":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", '論execute python'},
+      ['<leader>ep'] = {":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", '  '},
 
 
-    ['<leader>r']  = { ':NvimTreeRefresh<CR>', '論refresh nvimtree'},
+    ['<leader>r']  = { ':NvimTreeRefresh<CR>', ' refresh nvimtree'},
 
-    ['<M-j>'] = { 'ddp', '論move line down' },
-    ['<M-k>'] = { 'ddkP', '論move line up' },
+    ['<M-j>'] = { 'ddp', ' move line down' },
+    ['<M-k>'] = { 'ddkP', ' move line up' },
 
     -----------------
     -- Indent outdent
     -----------------
-    ['>'] = { 'V>', '論 indent' },
-    ['<'] = { 'V<', '論 outdent' },
+    ['>'] = { 'V>', '' },
+    ['<'] = { 'V<', '' },
 
     ---------------
     -- Resize split
     ---------------
-    ['<C-j>'] = { ':resize-1<CR>', '論shrink' },
-    ['<C-k>'] = { ':resize+1<CR>', '論grow' },
+    ['<C-j>'] = { ':resize-1<CR>', ' shrink' },
+    ['<C-k>'] = { ':resize+1<CR>', ' grow' },
 
-    ['<C-h>'] = { ':vertical resize-1<CR>', '論vertical shrink' },
-    ['<C-l>'] = { ':vertical resize+1<CR>', '論vertical grow' },
+    ['<C-h>'] = { ':vertical resize-1<CR>', '  vertical shrink' },
+    ['<C-l>'] = { ':vertical resize+1<CR>', ' vertical grow' },
 
-    ['<leader>m'] = {':MaximizerToggle<CR>', '論toggle miximize' },
+    ['<leader>m'] = {':MaximizerToggle<CR>', '' },
 
    },
    v = {
-    ['>'] = {'>gv', '論visual indent'},
-    ['<'] = {'<gv', '論visual outdent'},
+    ['>'] = {'>gv', ' visual indent'},
+    ['<'] = {'<gv', ' visual outdent'},
    },
 
    t = {
@@ -121,29 +115,28 @@ M.tabufline = {
       ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
 
       -- cycle through buffers
-      -- ["<TAB>"] = { "<cmd> BufferLineCycleNext <CR>", "  cycle next buffer" },
-      -- ["<S-Tab>"] = { "<cmd> BufferLineCyclePrev <CR>", "  cycle prev buffer" },
-      ["<M-.>"] = { "<cmd> BufferLineCycleNext <CR>", "  cycle next buffer" },
-      ["<M-,>"] = { "<cmd> BufferLineCyclePrev <CR>", "  cycle prev buffer" },
+      -- ["<TAB>"] = { "<cmd> Tbufnext <CR>", "  goto next buffer" },
+      -- ["<S-Tab>"] = { "<cmd> Tbufprev <CR> ", "  goto prev buffer" },
 
-      ["<TAB>"] = { "<cmd> Tbufnext <CR>", "  goto next buffer" },
-      ["<S-Tab>"] = { "<cmd> Tbufprev <CR> ", "  goto prev buffer" },
+      ["<M-.>"] = { "<cmd> Tbufnext <CR>", "  cycle next buffer" },
+      ["<M-,>"] = { "<cmd> Tbufprev <CR>", "  cycle prev buffer" },
+
 
       -- cycle through tabs
-      ["<leader>tp"] = { "<cmd> tabprevious <CR>", "  goto next tab" },
-      ["<leader>tn"] = { "<cmd> tabnext <CR> ", "  goto prev tab" },
+      -- ["<leader>tp"] = { "<cmd> tabprevious <CR>", "  goto next tab" },
+      -- ["<leader>tn"] = { "<cmd> tabnext <CR> ", "  goto prev tab" },
 
       -- close buffer + hide terminal buffer
-      ["<leader>x"] = {
-         function()
-            require("core.utils").close_buffer()
-         end,
-         "   close buffer",
-      },
+      -- ["<leader>x"] = {
+      --    function()
+      --       require("core.utils").close_buffer()
+      --    end,
+      --    "   close buffer",
+      -- },
 
       ["<M-q>"] = {
          function()
-            nvchad.close_buffer()
+            require("core.utils").close_buffer()
          end,
          "   close buffer",
       },
@@ -422,58 +415,58 @@ end
 
 M.vimspector = {
     n = {
-      ['<leader>dd'] = {':call vimspector#Launch()<CR>', 'launch vimspector'},
-      ['<leader>de'] = {':call vimspector#Reset()<CR>', 'reset vimspector'},
-      ['<leader>d<space>'] = {':call vimspector#Continue()<CR>', 'continue vimspector'},
+      ['<leader>dd'] = {':call vimspector#Launch()<CR>', ''},
+      ['<leader>de'] = {':call vimspector#Reset()<CR>', ' reset'},
+      ['<leader>d<space>'] = {':call vimspector#Continue()<CR>', ' 怜'},
 
-      ['<leader>dbp'] = {':call vimspector#ToggleBreakpoint()<CR>', ''},
-      ['<leader>dbc'] = {':call vimspector#ClearBreakpoints()<CR>', ''},
-      ['<leader>dbl'] = {':call vimspector#CleanLineBreakpoint()<CR>', ''},
+      ['<leader>dbp'] = {':call vimspector#ToggleBreakpoint()<CR>', ' toggle breakpoint'},
+      ['<leader>dbc'] = {':call vimspector#ClearBreakpoints()<CR>', ' clear breakpoints'},
+      ['<leader>dbl'] = {':call vimspector#CleanLineBreakpoint()<CR>', ' clean breakpoints'},
 
-      ['<leader>dl'] = {'<Plug>VimspectorStepInto', ''},
-      ['<leader>dj'] = {'<Plug>VimspectorStepover', ''},
+      ['<leader>dl'] = {'<Plug>VimspectorStepInto', ''},
+      ['<leader>dj'] = {'<Plug>VimspectorStepover', ''},
 
-      ['<leader>dk'] = {'<Plug>VimspectorStepOut', ''},
+      ['<leader>dk'] = {'<Plug>VimspectorStepOut', ''},
       ['<leader>d_'] = {'<Plug>VimspectorRestart', ''},
 
       ['<leader>drc'] = {':call vimspector#RunToCursor()<CR>', ''},
-      ['<leader>dcbp'] = {'<Plug>Vimspector ToggleConditionalBreakpoint', ''},
+      ['<leader>dcbp'] = {'<Plug>Vimspector ToggleConditionalBreakpoint', ' toggle conditional breakpoint'},
 
       ["<leader>dc"] = {
         function()
             vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.code)]]
         end,
-        "   toggle vimspector",
+        "   ",
       },
       ['<leader>dt'] = {
         function()
             vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.tagpage)]]
         end,
-        "   toggle vimspector",
+        "  tag ",
       },
       ['<leader>dv'] = {
         function()
             vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.variables)]]
         end,
-        "   toggle vimspector",
+        "  variables ",
       },
       ['<leader>dw'] = {
         function()
             vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.watches)]]
         end,
-        "   toggle vimspector",
+        "  watches ",
       },
       ['<leader>ds'] = {
         function()
             vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.stack_trace)]]
         end,
-        "   toggle vimspector",
+        "  stack ",
       },
       ['<leader>do'] = {
         function()
             vim.cmd [[:lua GotoWindow(vim.g.vimspector_session_windows.output)]]
         end,
-        "   toggle vimspector",
+        "   ",
       },
     },
 }

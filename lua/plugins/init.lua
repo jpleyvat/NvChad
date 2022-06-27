@@ -2,7 +2,7 @@ vim.cmd "packadd packer.nvim"
 
 local plugins = {
 
-   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
+   -- ["nvim-lua/plenary.nvim"] = { module = "plenary" },
    ["wbthomason/packer.nvim"] = {},
    ["NvChad/extensions"] = { module = { "telescope", "nvchad" } },
 
@@ -185,7 +185,6 @@ local plugins = {
    -- ["nvim-lua/plenary.nvim"] = {},
 
    ["sindrets/diffview.nvim"] = {
-      after = "plenary.nvim",
       requires = "nvim-lua/plenary.nvim"
    },
 
