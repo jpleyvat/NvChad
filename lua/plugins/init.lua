@@ -182,9 +182,10 @@ local plugins = {
       end,
    },
 
-   ["nvim-lua/plenary.nvim"] = {},
+   -- ["nvim-lua/plenary.nvim"] = {},
 
    ["sindrets/diffview.nvim"] = {
+      after = "plenary.nvim",
       requires = "nvim-lua/plenary.nvim"
    },
 

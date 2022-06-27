@@ -162,4 +162,14 @@ M.devicons = function()
    end
 end
 
+M.vimwiki = function()
+  local g = vim.g
+
+  g.vimwiki_list = {{
+    path  = '~/vimwiki/',
+    syntax = 'markdown',
+    ext = '.md',
+  },}
+end
+
 return M
