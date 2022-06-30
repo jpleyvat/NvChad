@@ -64,6 +64,42 @@ lspconfig.sumneko_lua.setup {
    },
 }
 
+lspconfig.pyright.setup {
+   on_attach = M.on_attach,
+
+   settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        diagnosticMode = "workspace",
+        useLibraryCodeForTypes = true
+      }
+    }
+   }
+}
+
+lspconfig.tsserver.setup {
+   on_attach = M.on_attach,
+
+   settings = {
+     compilerOptions= {
+        module= "commonjs",
+        target= "es6",
+        checkJs= false
+      },
+      exclude= {
+        "node_modules"
+      }
+   }
+}
+
+lspconfig.bashls.setup {
+   on_attach = M.on_attach,
+}
+
+lspconfig.cssls.setup {
+   on_attach = M.on_attach,
+}
 -- requires a file containing user's lspconfigs
 local addlsp_confs = utils.load_config().plugins.options.lspconfig.setup_lspconf
 

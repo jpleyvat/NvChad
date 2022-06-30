@@ -194,7 +194,9 @@ local plugins = {
       end,
    },
 
-   ["puremourning/vimspector"] = {},
+   ["puremourning/vimspector"] = {
+     opt = false,
+   },
 
    ["mattn/emmet-vim"] = {},
 
@@ -207,6 +209,8 @@ local plugins = {
    [ "kylechui/nvim-surround" ] = {},
 
    [ "sbdchd/neoformat" ] = {},
+
+   ["weilbith/nvim-code-action-menu"] = {},
 }
 
 require("core.packer").run(plugins)

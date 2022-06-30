@@ -172,4 +172,7 @@ M.vimwiki = function()
   },}
 end
 
+M.vimspector = function()
+end
+
 return M

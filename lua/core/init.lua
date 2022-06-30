@@ -36,6 +36,11 @@ autocmd("BufEnter", {
    command = "set fo-=c fo-=r fo-=o",
 })
 
+autocmd("BufEnter,", {
+   pattern = "vimspector*",
+   command = "set syntax=javascript",
+})
+
 vim.t.bufs = vim.api.nvim_list_bufs()
 
 -- thx to https://github.com/ii14 & stores buffer per tab -> table
