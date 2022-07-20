@@ -7,104 +7,121 @@ end
 local M = {}
 
 M.general = {
-
    i = {
-      -- go to  beginning and end
-      ["<C-b>"] = { "<ESC>^i", "  beginning of line" },
-      ["<C-e>"] = { "<End>", "壟 end of line" },
+     -- go to  beginning and end
+     ["<C-b>"] = { "<ESC>^i", "  beginning of line" },
+     ["<C-e>"] = { "<End>", "壟 end of line" },
 
-      -- navigate within insert mode
-      ["<C-h>"] = { "<Left>", "  move left" },
-      ["<C-l>"] = { "<Right>", " move right" },
-      ["<C-j>"] = { "<Down>", " move down" },
-      ["<C-k>"] = { "<Up>", " move up" },
+     -- navigate within insert mode
+     ["<C-h>"] = { "<Left>", "  move left" },
+     ["<C-l>"] = { "<Right>", " move right" },
+     ["<C-j>"] = { "<Down>", " move down" },
+     ["<C-k>"] = { "<Up>", " move up" },
    },
 
    n = {
 
-      ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
+     ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
 
-      -- switch between windows
-      -- ["<C-h>"] = { "<C-w>h", " window left" },
-      -- ["<C-l>"] = { "<C-w>l", " window right" },
-      -- ["<C-j>"] = { "<C-w>j", " window down" },
-      -- ["<C-k>"] = { "<C-w>k", " window up" },
+     -- switch between windows
+     -- ["<C-h>"] = { "<C-w>h", " window left" },
+     -- ["<C-l>"] = { "<C-w>l", " window right" },
+     -- ["<C-j>"] = { "<C-w>j", " window down" },
+     -- ["<C-k>"] = { "<C-w>k", " window up" },
 
-      -- save
-      ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
+     -- save
+     ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
 
-      -- Copy all
-      ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
+     -- Copy all
+     ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
 
-      -- line numbers
-      ["<leader>nn"] = { "<cmd> set nornu nonu <CR>", "   toggle line number" },
-      ["<leader>nu"] = { "<cmd> set nornu nu! <CR>", "   toggle line number" },
-      ["<leader>nr"] = { "<cmd> set nonu rnu! <CR>", "   toggle relative number" },
+     -- line numbers
+     ["<leader>nn"] = { "<cmd> set nornu nonu <CR>", "   toggle line number" },
+     ["<leader>nu"] = { "<cmd> set nornu nu! <CR>", "   toggle line number" },
+     ["<leader>nr"] = { "<cmd> set nonu rnu! <CR>", "   toggle relative number" },
 
-      -- update nvchad
-      ["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
+     -- update nvchad
+     ["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
 
-      ["<leader>tt"] = {
-         function()
-            require("base46").toggle_theme()
-         end,
+     ["<leader>tt"] = {
+        function()
+           require("base46").toggle_theme()
+        end,
 
-         "   toggle theme",
-      },
+        "   toggle theme",
+     },
 
-      ["<leader>z"] = { "[[$V%zf]]", "祉" },
+     ["<leader>z"] = { "[[$V%zf]]", "祉" },
 
-      ["<leader>fp"] = { ":exec '!black %'<CR>", " format" },
-      ["<leader>fs"] = { ":exec '!standard --fix %'<CR>", " format" },
-      ["<leader>ft"] = { ":exec '!ts-standard --fix %'<CR>", " format" },
+     ["<leader>fp"] = { ":exec '!black %'<CR>", " format" },
+     ["<leader>fs"] = { ":exec '!standard --fix %'<CR>", " format" },
+     ["<leader>ft"] = { ":exec '!ts-standard --fix %'<CR>", " format" },
 
-      -- Git
-      ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '  hunk ' },
-      ['<leader>gk'] = { ':Gitsigns prev_hunk<CR>', '  hunk ' },
+     -- Git
+     ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '  hunk ' },
+     ['<leader>gk'] = { ':Gitsigns prev_hunk<CR>', '  hunk ' },
 
-      ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '  hunk sign' },
-      ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>', '  hunk reset' },
+     ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '  hunk sign' },
+     ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>', '  hunk reset' },
 
-      ['<leader>gp'] = { ':Gitsigns preview_hunk<CR>', '  preview' },
-      ['<leader>gg'] = { ':DiffviewOpen<CR>', '  繁 open' },
-      ['<leader>ge'] = { ':DiffviewClose<CR>', '  繁 close' },
-      ['<leader>gh'] = { ':DiffviewFileHistory<CR>', '  diff history' },
+     ['<leader>gp'] = { ':Gitsigns preview_hunk<CR>', '  preview' },
+     ['<leader>gg'] = { ':DiffviewOpen<CR>', '  繁 open' },
+     ['<leader>ge'] = { ':DiffviewClose<CR>', '  繁 close' },
+     ['<leader>gh'] = { ':DiffviewFileHistory<CR>', '  diff history' },
 
-      ['S'] = {':%s//g<Left><Left>', ' replace all'},
+     ['S'] = {':%s//g<Left><Left>', ' replace all'},
 
-      ['<leader>ep'] = {":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", '  '},
+     ['<leader>ep'] = {":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", '  '},
 
 
-    ['<leader>r']  = { ':NvimTreeRefresh<CR>', ' refresh nvimtree'},
+   ['<leader>r']  = { ':NvimTreeRefresh<CR>', ' refresh nvimtree'},
 
-    ['<M-j>'] = { 'ddp', ' move line down' },
-    ['<M-k>'] = { 'ddkP', ' move line up' },
+   ['<M-j>'] = { 'ddp', ' move line down' },
+   ['<M-k>'] = { 'ddkP', ' move line up' },
 
-    -----------------
-    -- Indent outdent
-    -----------------
-    ['>'] = { 'V>', '' },
-    ['<'] = { 'V<', '' },
+   -----------------
+   -- Indent outdent
+   -----------------
+   ['>'] = { 'V>', '' },
+   ['<'] = { 'V<', '' },
 
-    ---------------
-    -- Resize split
-    ---------------
-    ['<C-j>'] = { ':resize-1<CR>', ' shrink' },
-    ['<C-k>'] = { ':resize+1<CR>', ' grow' },
+   ---------------
+   -- Resize split
+   ---------------
+   ['<C-j>'] = { ':resize-1<CR>', ' shrink' },
+   ['<C-k>'] = { ':resize+1<CR>', ' grow' },
 
-    ['<C-h>'] = { ':vertical resize-1<CR>', '  vertical shrink' },
-    ['<C-l>'] = { ':vertical resize+1<CR>', ' vertical grow' },
+   ['<C-h>'] = { ':vertical resize-1<CR>', '  vertical shrink' },
+   ['<C-l>'] = { ':vertical resize+1<CR>', ' vertical grow' },
 
-    ['<leader>m'] = {':MaximizerToggle<CR>', '' },
+   ['<leader>m'] = {':MaximizerToggle<CR>', '' },
 
    },
    v = {
-    ['>'] = {'>gv', ' visual indent'},
-    ['<'] = {'<gv', ' visual outdent'},
+     ['>'] = {'>gv', ' visual indent'},
+     ['<'] = {'<gv', ' visual outdent'},
+      -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>
+      -- http://www.reddit.com/r/vim/comments/2k4cbr/problem_with_gj_and_gk/
+      -- empty mode is same as using <cmd> :map
+      -- also don't use g[j|k] when in operator pending mode, so it doesn't alter d, y or c behaviour
+      ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+      ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+      ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+      ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
    },
 
    t = {
       ["<C-x>"] = { termcodes "<C-\\><C-N>", "   escape terminal mode" },
+   },
+
+   v = {
+      ["j"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+      ["k"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+      ["<Up>"] = { 'v:count || mode(1)[0:1] == "no" ? "k" : "gk"', opts = { expr = true } },
+      ["<Down>"] = { 'v:count || mode(1)[0:1] == "no" ? "j" : "gj"', opts = { expr = true } },
+      -- Don't copy the replaced text after pasting in visual mode
+      -- https://vim.fandom.com/wiki/Replace_a_word_with_yanked_text#Alternative_mapping_for_paste
+      ["p"] = { 'p:let @+=@0<CR>:let @"=@0<CR>', opts = { silent = true } },
    },
 }
 
@@ -213,7 +230,7 @@ M.lspconfig = {
 
       ["<leader>ra"] = {
          function()
-            require("nvchad.ui.renamer").open()
+            require("nvchad_ui.renamer").open()
          end,
          "   lsp rename",
       },
