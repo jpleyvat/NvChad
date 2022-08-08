@@ -81,6 +81,7 @@ local default_plugins = {
    "compiler",
    "bugreport",
    "ftplugin",
+   "python3"
 }
 
 for _, plugin in pairs(default_plugins) do

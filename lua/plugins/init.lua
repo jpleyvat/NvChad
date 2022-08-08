@@ -202,7 +202,7 @@ local plugins = {
    },
 
    ["puremourning/vimspector"] = {
-     opt = false,
+      opt = false,
    },
 
    ["mattn/emmet-vim"] = {},
