@@ -22,76 +22,76 @@ M.general = {
   n = {
     ["<ESC>"] = { "<cmd> noh <CR>", "  no highlight" },
 
-    -- switch between windows
-    -- ["<C-h>"] = { "<C-w>h", " window left" },
-    -- ["<C-l>"] = { "<C-w>l", " window right" },
-    -- ["<C-j>"] = { "<C-w>j", " window down" },
-    -- ["<C-k>"] = { "<C-w>k", " window up" },
+  -- switch between windows
+  -- ["<C-h>"] = { "<C-w>h", " window left" },
+  -- ["<C-l>"] = { "<C-w>l", " window right" },
+  -- ["<C-j>"] = { "<C-w>j", " window down" },
+  -- ["<C-k>"] = { "<C-w>k", " window up" },
 
-     -- line numbers
-     ["<leader>nn"] = { "<cmd> set nornu nonu <CR>", "   toggle line number" },
-     ["<leader>nu"] = { "<cmd> set nornu nu! <CR>", "   toggle line number" },
-     ["<leader>nr"] = { "<cmd> set nonu rnu! <CR>", "   toggle relative number" },
+    -- line numbers
+    ["<leader>nn"] = { "<cmd> set nornu nonu <CR>", "   toggle line number" },
+    ["<leader>nu"] = { "<cmd> set nornu nu! <CR>", "   toggle line number" },
+    ["<leader>nr"] = { "<cmd> set nonu rnu! <CR>", "   toggle relative number" },
 
-     -- update nvchad
-     ["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
+    -- update nvchad
+    ["<leader>uu"] = { "<cmd> :NvChadUpdate <CR>", "  update nvchad" },
 
-     ["<leader>tt"] = {
-        function()
-           require("base46").toggle_theme()
-        end,
+    ["<leader>tt"] = {
+       function()
+          require("base46").toggle_theme()
+       end,
 
-        "   toggle theme",
-     },
+       "   toggle theme",
+    },
 
-     ["<leader>z"] = { "[[$V%zf]]", "祉" },
+    ["<leader>z"] = { "[[$V%zf]]", "祉" },
 
-     ["<leader>fp"] = { ":exec '!black %'<CR>", " format" },
-     ["<leader>fs"] = { ":exec '!standard --fix %'<CR>", " format" },
-     ["<leader>ft"] = { ":exec '!ts-standard --fix %'<CR>", " format" },
+    ["<leader>fp"] = { ":exec '!black %'<CR>", " format" },
+    ["<leader>fs"] = { ":exec '!standard --fix %'<CR>", " format" },
+    ["<leader>ft"] = { ":exec '!ts-standard --fix %'<CR>", " format" },
 
-     -- Git
-     ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '  hunk ' },
-     ['<leader>gk'] = { ':Gitsigns prev_hunk<CR>', '  hunk ' },
+    -- Git
+    ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '  hunk ' },
+    ['<leader>gk'] = { ':Gitsigns prev_hunk<CR>', '  hunk ' },
 
-     ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '  hunk sign' },
-     ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>', '  hunk reset' },
+    ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '  hunk sign' },
+    ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>', '  hunk reset' },
 
-     ['<leader>gp'] = { ':Gitsigns preview_hunk<CR>', '  preview' },
-     ['<leader>gg'] = { ':DiffviewOpen<CR>', '  繁 open' },
-     ['<leader>ge'] = { ':DiffviewClose<CR>', '  繁 close' },
-     ['<leader>gh'] = { ':DiffviewFileHistory<CR>', '  diff history' },
+    ['<leader>gp'] = { ':Gitsigns preview_hunk<CR>', '  preview' },
+    ['<leader>gg'] = { ':DiffviewOpen<CR>', '  繁 open' },
+    ['<leader>ge'] = { ':DiffviewClose<CR>', '  繁 close' },
+    ['<leader>gh'] = { ':DiffviewFileHistory<CR>', '  diff history' },
 
-     ['S'] = {':%s//g<Left><Left>', ' replace all'},
+    ['S'] = {':%s//g<Left><Left>', ' replace all'},
 
-     ['<leader>ep'] = {":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", '  '},
-
-
-     ['<leader>r']  = { ':NvimTreeRefresh<CR>', ' refresh nvimtree'},
-
-     ['<M-j>'] = { 'ddp', ' move line down' },
-     ['<M-k>'] = { 'ddkP', ' move line up' },
-
-     -----------------
-     -- Indent outdent
-     -----------------
-     ['>'] = { 'V>', '' },
-     ['<'] = { 'V<', '' },
-
-     ---------------
-     -- Resize split
-     ---------------
-     ['<C-j>'] = { ':resize-1<CR>', ' shrink' },
-     ['<C-k>'] = { ':resize+1<CR>', ' grow' },
-
-     ['<C-h>'] = { ':vertical resize-1<CR>', '  vertical shrink' },
-     ['<C-l>'] = { ':vertical resize+1<CR>', ' vertical grow' },
-
-     ['<leader>m'] = {':MaximizerToggle<CR>', '' },
+    ['<leader>ep'] = {":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", '  '},
 
 
-    -- save
-    ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
+    ['<leader>r']  = { ':NvimTreeRefresh<CR>', ' refresh nvimtree'},
+
+    ['<M-j>'] = { 'ddp', ' move line down' },
+    ['<M-k>'] = { 'ddkP', ' move line up' },
+
+    -----------------
+    -- Indent outdent
+    -----------------
+    ['>'] = { 'V>', '' },
+    ['<'] = { 'V<', '' },
+
+    ---------------
+    -- Resize split
+    ---------------
+    ['<C-j>'] = { ':resize-1<CR>', ' shrink' },
+    ['<C-k>'] = { ':resize+1<CR>', ' grow' },
+
+    ['<C-h>'] = { ':vertical resize-1<CR>', '  vertical shrink' },
+    ['<C-l>'] = { ':vertical resize+1<CR>', ' vertical grow' },
+
+    ['<leader>m'] = {':MaximizerToggle<CR>', '' },
+
+
+     -- save
+     ["<C-s>"] = { "<cmd> w <CR>", "﬚  save file" },
 
     -- Copy all
     ["<C-c>"] = { "<cmd> %y+ <CR>", "  copy whole file" },
@@ -113,7 +113,8 @@ M.general = {
     ["<S-b>"] = { "<cmd> enew <CR>", "烙 new buffer" },
 
     -- close buffer + hide terminal buffer
-    ["<leader>x"] = {
+    -- ["<leader>x"] = {
+    ["<M-q>"] = {
       function()
         require("core.utils").close_buffer()
       end,
