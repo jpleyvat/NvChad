@@ -184,7 +184,7 @@ M.comment = {
   n = {
     ["<leader>/"] = {
       function()
-        require("Comment.api").toggle_current_linewise()
+        require("Comment.api").toggle.linewise.current()
       end,
       "蘒  toggle comment",
     },
@@ -192,7 +192,7 @@ M.comment = {
 
   v = {
     ["<leader>/"] = {
-      "<ESC><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<CR>",
+      "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
       "蘒  toggle comment",
     },
   },
@@ -259,7 +259,7 @@ M.lspconfig = {
       "   lsp code_action",
     },
 
-    ["gr"] = {
+    ["<leader>lr"] = {
       function()
         vim.lsp.buf.references()
       end,
