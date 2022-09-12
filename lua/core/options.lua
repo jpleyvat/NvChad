@@ -105,7 +105,6 @@ end
 
 local enable_providers = {
   "python3_provider",
-  "node_provider",
 }
     
 for _, plugin in pairs(enable_providers) do
