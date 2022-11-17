@@ -22,6 +22,10 @@ local sources = {
    -- Shell
    b.formatting.shfmt,
    b.diagnostics.shellcheck.with { diagnostics_format = "#{m} [#{c}]" },
+
+   -- Spell check
+   b.diagnostics.cspell,
+   b.code_actions.cspell
 }
 
 local M = {}

@@ -47,14 +47,21 @@ M.general = {
     ["<leader>z"] = { "[[$V%zf]]", "祉" },
 
     ["<leader>fp"] = { ":exec '!black %'<CR>", " format" },
-    ["<leader>fs"] = { ":exec '!standard --fix %'<CR>", " format" },
-    ["<leader>ft"] = { ":exec '!ts-standard --fix %'<CR>", " format" },
+
+    ["<leader>fjs"] = { ":exec '!standard --fix %'<CR>", " format standard" },
+    ["<leader>fjp"] = { ":exec '!prettier --write %'<CR>", " format prettier" },
+
+    ["<leader>ftt"] = { ":exec '!ts-standard --fix %'<CR>", " format ts-standard" },
+    ["<leader>ftp"] = { ":exec '!prettier --write %'<CR>", " format prettier" },
+
+    ["<leader>fjj"] = { ":exec '!jq %'<CR>", " format json jq" },
+    ["<leader>fjjo"] = { ":exec '!jq -c %'<CR>", " format json jq one line" },
 
     -- Git
     ['<leader>gj'] = { ':Gitsigns next_hunk<CR>', '  hunk ' },
     ['<leader>gk'] = { ':Gitsigns prev_hunk<CR>', '  hunk ' },
 
-    ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '  hunk sign' },
+    -- ['<leader>gs'] = { ':Gitsigns sign_hunk<CR>', '  hunk sign' },
     ['<leader>gr'] = { ':Gitsigns reset_hunk<CR>', '  hunk reset' },
 
     ['<leader>gp'] = { ':Gitsigns preview_hunk<CR>', '  preview' },
@@ -65,7 +72,6 @@ M.general = {
     ['S'] = {':%s//g<Left><Left>', ' replace all'},
 
     ['<leader>ep'] = {":w<CR>:exec '!python3' shellescape(@%, 1)<CR>", '  '},
-
 
     ['<leader>r']  = { ':NvimTreeRefresh<CR>', ' refresh nvimtree'},
 
@@ -125,6 +131,8 @@ M.general = {
   t = { ["<C-x>"] = { termcodes "<C-\\><C-N>", "   escape terminal mode" } },
 
   v = {
+    -- ['<leader>eq'] = {":'<,'>:w:exec !echo -n '<,'> | gpdb ops_db<CR>", '  '},
+
     ['>'] = {'>gv', ' visual indent'},
     ['<'] = {'<gv', ' visual outdent'},
     -- Allow moving the cursor through wrapped lines with j, k, <Up> and <Down>

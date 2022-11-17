@@ -237,13 +237,26 @@ local plugins = {
 
    [ "szw/vim-maximizer" ] ={},
 
-   [ "github/copilot.vim" ] = {},
+   [ "github/copilot.vim" ] = {
+    config = function()
+       require("plugins.configs.others").copilot()
+    end,
+   },
 
    [ "kylechui/nvim-surround" ] = {},
 
    [ "sbdchd/neoformat" ] = {},
 
    ["weilbith/nvim-code-action-menu"] = {},
+
+   ["mechatroner/rainbow_csv"] = {},
+
+   ["jose-elias-alvarez/null-ls.nvim"] = {
+    module = "null-ls",
+    config = function()
+      require "plugins.configs.null-ls"
+    end,
+   },
 
 }
 

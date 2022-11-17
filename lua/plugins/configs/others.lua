@@ -180,6 +180,12 @@ M.vimwiki = function()
   },}
 end
 
+M.copilot = function()
+  local g = vim.g
+
+  vim.g.copilot_node_command = '/home/juan/.nvm/versions/node/v16.17.0/bin/node'
+end
+
 M.vimspector = function()
 end
 
