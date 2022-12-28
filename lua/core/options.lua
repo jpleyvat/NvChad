@@ -2,24 +2,16 @@ local opt = vim.opt
 local g = vim.g
 local config = require("core.utils").load_config()
 
-g.vim_version = vim.version().minor
 g.nvchad_theme = config.ui.theme
 g.toggle_theme_icon = "   "
 g.transparency = config.ui.transparency
 g.theme_switcher_loaded = false
 
--- use filetype.lua instead of filetype.vim. it's enabled by default in neovim 0.8 (nightly)
-if g.vim_version < 8 then
-  g.did_load_filetypes = 0
-  g.do_filetype_lua = 1
-end
-
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
 
-opt.title = true
 opt.clipboard = "unnamedplus"
-opt.cul = true -- cursor line
+opt.cursorline = true
 
 -- Indenting
 opt.expandtab = true
@@ -85,7 +77,6 @@ local default_plugins = {
   "compiler",
   "bugreport",
   "ftplugin",
-  "python3"
 }
 
 for _, plugin in pairs(default_plugins) do
@@ -106,14 +97,3 @@ end
 local enable_providers = {
   "python3_provider",
 }
-
-for _, plugin in pairs(enable_providers) do
-  vim.g["loaded_" .. plugin] = nil
-  vim.cmd("runtime " .. plugin)
-end
-
--- set shada path
-vim.schedule(function()
-  vim.opt.shadafile = vim.fn.stdpath(g.vim_version > 7 and "state" or "data") .. "/shada/main.shada"
-  vim.cmd [[ silent! rsh ]]
-end)

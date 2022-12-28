@@ -1,7 +1,9 @@
+vim.defer_fn(function()
+  pcall(require, "impatient")
+end, 0)
+
 require "core"
 require "core.options"
-
-require("core.utils").load_mappings()
 
 -- setup packer + plugins
 local fn = vim.fn
@@ -16,6 +18,17 @@ if fn.empty(fn.glob(install_path)) > 0 then
   vim.cmd "packadd packer.nvim"
   require "plugins"
   vim.cmd "PackerSync"
+
+  -- install binaries from mason.nvim & tsparsers
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "PackerComplete",
+    callback = function()
+      vim.cmd "bw | silent! MasonInstallAll" -- close packer window
+      require("packer").loader "nvim-treesitter"
+    end,
+  })
 end
 
 pcall(require, "custom")
+
+require("core.utils").load_mappings()
