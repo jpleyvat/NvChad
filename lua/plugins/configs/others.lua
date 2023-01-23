@@ -168,6 +168,25 @@ M.devicons = function()
   end
 end
 
+M.vimwiki = function()
+  local g = vim.g
+
+  g.vimwiki_list = {{
+    path  = '~/vimwiki/',
+    syntax = 'markdown',
+    ext = '.md',
+  },}
+end
+
+M.copilot = function()
+  local g = vim.g
+
+  vim.g.copilot_node_command = '/home/juan/.nvm/versions/node/v16.17.0/bin/node'
+end
+
+M.vimspector = function()
+end
+
 M.packer_init = function()
   return {
     auto_clean = true,

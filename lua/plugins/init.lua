@@ -193,7 +193,6 @@ local plugins = {
 
   -- Only load whichkey after all the gui
   ["folke/which-key.nvim"] = {
-    disable = true,
     module = "which-key",
     keys = { "<leader>", '"', "'", "`" },
     config = function()
@@ -203,6 +202,53 @@ local plugins = {
       require("core.utils").load_mappings "whichkey"
     end,
   },
+
+  -- Speed up deffered plugins
+  ["lewis6991/impatient.nvim"] = { module = "impatient" },
+
+   ["nvim-lua/plenary.nvim"] = {},
+
+   ["sindrets/diffview.nvim"] = {
+      requires = "nvim-lua/plenary.nvim"
+   },
+
+   ["vimwiki/vimwiki"] = {
+      config = function()
+         require("plugins.configs.others").vimwiki()
+      end,
+   },
+
+   ["puremourning/vimspector"] = {
+      opt = false,
+   },
+
+   ["mattn/emmet-vim"] = {},
+
+   [ "tomlion/vim-solidity" ] = {},
+
+   [ "szw/vim-maximizer" ] ={},
+
+   [ "github/copilot.vim" ] = {
+    config = function()
+       require("plugins.configs.others").copilot()
+    end,
+   },
+
+   [ "kylechui/nvim-surround" ] = {},
+
+   [ "sbdchd/neoformat" ] = {},
+
+   ["weilbith/nvim-code-action-menu"] = {},
+
+   ["mechatroner/rainbow_csv"] = {},
+
+   ["jose-elias-alvarez/null-ls.nvim"] = {
+    module = "null-ls",
+    config = function()
+      require "plugins.configs.null-ls"
+    end,
+   },
+
 }
 
 -- Load all plugins

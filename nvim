@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PARAM=$1; shift
+
+if [[ "$PARAM" == "--load" ]]; then
+  nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
+elif [[ "$PARAM" == "--init" ]]; then
+  git remote rename origin jpleyvat
+  git remote add origin git@github.com:NvChad/NvChad.git
+fi
