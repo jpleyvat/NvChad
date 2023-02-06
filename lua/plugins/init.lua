@@ -204,51 +204,64 @@ local plugins = {
   },
 
   -- Speed up deffered plugins
-  ["lewis6991/impatient.nvim"] = { module = "impatient" },
+  -- ["lewis6991/impatient.nvim"] = { module = "impatient" },
+  --
+  -- ["nvim-lua/plenary.nvim"] = {},
 
-   ["nvim-lua/plenary.nvim"] = {},
+  ["sindrets/diffview.nvim"] = {
+     requires = "nvim-lua/plenary.nvim"
+  },
 
-   ["sindrets/diffview.nvim"] = {
-      requires = "nvim-lua/plenary.nvim"
-   },
+  ["vimwiki/vimwiki"] = {
+     config = function()
+        require("plugins.configs.others").vimwiki()
+     end,
+  },
 
-   ["vimwiki/vimwiki"] = {
-      config = function()
-         require("plugins.configs.others").vimwiki()
-      end,
-   },
-
-   ["puremourning/vimspector"] = {
-      opt = false,
-   },
-
-   ["mattn/emmet-vim"] = {},
-
-   [ "tomlion/vim-solidity" ] = {},
-
-   [ "szw/vim-maximizer" ] ={},
-
-   [ "github/copilot.vim" ] = {
+  ["puremourning/vimspector"] = {
     config = function()
-       require("plugins.configs.others").copilot()
+      require("plugins.configs.others").vimspector()
     end,
-   },
+  },
 
-   [ "kylechui/nvim-surround" ] = {},
+  ["mattn/emmet-vim"] = {},
 
-   [ "sbdchd/neoformat" ] = {},
+  [ "tomlion/vim-solidity" ] = {},
 
-   ["weilbith/nvim-code-action-menu"] = {},
+  [ "szw/vim-maximizer" ] ={},
 
-   ["mechatroner/rainbow_csv"] = {},
-
-   ["jose-elias-alvarez/null-ls.nvim"] = {
-    module = "null-ls",
+  [ "github/copilot.vim" ] = {
     config = function()
-      require "plugins.configs.null-ls"
+      require("plugins.configs.others").copilot()
     end,
-   },
+  },
 
+  [ "kylechui/nvim-surround" ] = {},
+
+  [ "sbdchd/neoformat" ] = {},
+
+  ["weilbith/nvim-code-action-menu"] = {},
+
+  ["mechatroner/rainbow_csv"] = {},
+
+  ["jose-elias-alvarez/null-ls.nvim"] = {
+   module = "null-ls",
+   config = function()
+     require "plugins.configs.null-ls"
+   end,
+  },
+
+  ["phaazon/hop.nvim"] = {
+    branch = 'v2',
+    config = function()
+      require("plugins.configs.others").hop()
+    --   -- you can configure Hop the way you like here; see :h hop-config
+    --   require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' }
+    -- end,
+    -- setup = function()
+    --   require'hop'.setup()
+    end,
+  }
 }
 
 -- Load all plugins
